@@ -42,19 +42,21 @@ type Database struct {
 
 var DatabaseConfig = &Database{}
 
+var Config *ini.File
+
 func SetUp() {
-	appConfig, err := ini.Load("config/app.ini")
+	Config, err := ini.Load("config/app.ini")
 	if err != nil {
 		log.Fatal("初始化配置文件失败: ", err)
 	}
-	err = appConfig.Section("app").MapTo(AppConfig)
+	err = Config.Section("app").MapTo(AppConfig)
 	if err != nil {
 		log.Fatal("config mapTo appConfig err: ", err)
 	}
 
 	AppConfig.ImageMaxSize = AppConfig.ImageMaxSize * 1024 * 1024
 
-	err = appConfig.Section("server").MapTo(ServerConfig)
+	err = Config.Section("server").MapTo(ServerConfig)
 	if err != nil {
 		log.Fatalf("config mapTo ServerSetting err: %v", err)
 	}
@@ -62,7 +64,7 @@ func SetUp() {
 	ServerConfig.ReadTimeout = ServerConfig.ReadTimeout * time.Second
 	ServerConfig.WriteTimeout = ServerConfig.WriteTimeout * time.Second
 
-	err = appConfig.Section("database").MapTo(DatabaseConfig)
+	err = Config.Section("database").MapTo(DatabaseConfig)
 	if err != nil {
 		log.Fatalf("config mapTo DatabaseSetting err: %v", err)
 	}
