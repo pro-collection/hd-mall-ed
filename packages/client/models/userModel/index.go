@@ -20,7 +20,7 @@ func (user *User) FindUser() User {
 }
 
 // 通过 id 查找user
-func (*User) findUserById(id uint) (User, error) {
+func (*User) FindUserById(id uint) (User, error) {
 	resultUser := User{}
 	err := database.DataBase.First(&resultUser, id).Error
 	if err != nil {
@@ -30,7 +30,7 @@ func (*User) findUserById(id uint) (User, error) {
 }
 
 // 通过用户名查找
-func (*User) findUserByName(name string) (User, error) {
+func (*User) FindUserByName(name string) (User, error) {
 	resultUser := User{}
 	err := database.DataBase.Where("name = ?", name).First(&resultUser).Error
 	if err != nil {

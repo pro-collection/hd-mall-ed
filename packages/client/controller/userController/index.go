@@ -11,11 +11,27 @@ func CreateUser(c *gin.Context) {
 	var err error
 	user := &User{}
 
-	err = c.ShouldBindJSON(user)
+	// 绑定user信息， 以及参数校验
+	if handleBindUserHasErrorHelper(user, c) {
+		return
+	}
+
+	// 判断用户是否存在
+	if handleCheckUserExistHelper(user, c) {
+		return
+	}
+
+	err = user.CreateUser()
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code":    -1,
-			"message": "参数错误",
+			"message": "创建用户失败",
 		})
+		return
 	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"code":    0,
+		"message": "创建用户成功过",
+	})
 }
