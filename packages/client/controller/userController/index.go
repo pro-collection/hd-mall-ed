@@ -35,3 +35,30 @@ func CreateUser(c *gin.Context) {
 		"message": "创建用户成功过",
 	})
 }
+
+func UpdateUser(c *gin.Context) {
+	var err error
+	user := &User{}
+
+	if handleBindUserHasErrorHelper(user, c) {
+		return
+	}
+
+	if handleCheckUserExistHelper(user, c) {
+		return
+	}
+
+	err = user.Update()
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code":    -1,
+			"message": "更新失败",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"code":    0,
+		"message": "更新成功",
+	})
+}
