@@ -29,4 +29,18 @@ func (*User) findUserById(id uint) (User, error) {
 	return resultUser, nil
 }
 
+// 通过用户名查找
+func (*User) findUserByName(name string) (User, error) {
+	resultUser := User{}
+	err := database.DataBase.Where("name = ?", name).First(&resultUser).Error
+	if err != nil {
+		return resultUser, err
+	}
+	return resultUser, nil
+}
 
+// 更新方法
+func (user *User) Update() error {
+	err := database.DataBase.Save(user).Error
+	return err
+}
