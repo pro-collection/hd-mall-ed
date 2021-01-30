@@ -1,6 +1,9 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"hd-mall-ed/packages/client/controller/userController"
+)
 
 func SetUpRouter() *gin.Engine {
 	router := gin.Default()
@@ -9,7 +12,8 @@ func SetUpRouter() *gin.Engine {
 	{
 		userRouter := index.Group("/user")
 		{
-			userRouter.GET("/:name")
+			userRouter.POST("/create", userController.CreateUser)
+			userRouter.POST("/update", userController.UpdateUser)
 		}
 	}
 
