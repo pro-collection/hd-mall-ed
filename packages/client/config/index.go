@@ -43,7 +43,7 @@ type Database struct {
 var DatabaseConfig = &Database{}
 
 func SetUp() {
-	appConfig, err := ini.Load("config/app.ini")
+	appConfig, err := ini.Load("packages/client/config/app.ini")
 	if err != nil {
 		log.Fatal("初始化配置文件失败: ", err)
 	}
