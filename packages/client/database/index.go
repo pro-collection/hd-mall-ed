@@ -66,6 +66,9 @@ func SetUp() {
 		log.Fatalf("get db.BD() error: %v", err)
 	}
 
+	// 初始化表
+	autoMigrateTable()
+
 	// SetMaxIdleConns 设置空闲连接池中连接的最大数量
 	sqlDB.SetMaxIdleConns(10)
 	// SetMaxOpenConns 设置打开数据库连接的最大数量。
