@@ -12,4 +12,6 @@ func SetUpRouter() *gin.Engine {
 			userRouter.GET("/:name")
 		}
 	}
+
+	return router
 }
