@@ -20,8 +20,6 @@ func handleBindUserHasErrorHelper(user *userModel.User, c *gin.Context) bool {
 }
 
 // 判断用户是否存在
-
-
 func handleCheckUserExistHelper(user *userModel.User, c *gin.Context) bool {
 	resultUser, _ := user.FindUserByName(user.Name)
 	if resultUser.ID > 0 {
