@@ -10,4 +10,5 @@ type User struct {
 	DefaultAddressId uint   `gorm:"comment:默认地址"`
 	Avatar           string `gorm:"comment:头像"`
 	Email            string `gorm:"comment:邮箱"`
+	Role             string `gorm:"comment:角色"`
 }
