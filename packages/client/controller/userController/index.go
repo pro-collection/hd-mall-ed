@@ -32,7 +32,7 @@ func CreateUser(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{
 		"code":    0,
-		"message": "创建用户成功过",
+		"message": "创建用户成功",
 	})
 }
 
