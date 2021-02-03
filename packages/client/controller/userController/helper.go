@@ -3,6 +3,7 @@ package userController
 import (
 	"github.com/gin-gonic/gin"
 	"hd-mall-ed/packages/client/models/userModel"
+	"hd-mall-ed/packages/client/pkg/e"
 	"net/http"
 )
 
@@ -11,8 +12,8 @@ func handleBindUserHasErrorHelper(user *userModel.User, c *gin.Context) bool {
 	err := c.ShouldBindJSON(user)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
-			"code":    -1,
-			"message": "参数错误",
+			"code":    e.InvalidParams,
+			"message": e.GetMsg(e.InvalidParams),
 		})
 		return true
 	}
@@ -25,8 +26,8 @@ func handleBindUserHasErrorHelper(user *userModel.User, c *gin.Context) bool {
 func handleCheckUserIdNotExistHelper(user *userModel.User, c *gin.Context) bool {
 	if user.ID <= 0 {
 		c.JSON(http.StatusOK, gin.H{
-			"code":    -1,
-			"message": "缺少id",
+			"code":    e.NotFoundId,
+			"message": e.GetMsg(e.NotFoundId),
 		})
 		return true
 	}
@@ -39,7 +40,7 @@ func handleCheckUserExistHelper(user *userModel.User, c *gin.Context) bool {
 	resultUser, _ := user.FindUserByName(user.Name)
 	if resultUser.ID > 0 {
 		c.JSON(http.StatusOK, gin.H{
-			"code":    -1,
+			"code":    e.UserExist,
 			"name":    resultUser.Name,
 			"message": "用户名已经存在",
 		})

@@ -25,8 +25,8 @@ func CreateUser(c *gin.Context) {
 	err = user.CreateUser()
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
-			"code":    e.InvalidParams,
-			"message": "创建用户失败",
+			"code":    e.CreateUserFail,
+			"message": e.GetMsg(e.CreateUserFail),
 		})
 		return
 	}
