@@ -19,6 +19,21 @@ func handleBindUserHasErrorHelper(user *userModel.User, c *gin.Context) bool {
 	return false
 }
 
+// 判断该用户是否 【不存在】， 更新用户的时候判定
+// 不存在的时候， 返回true
+// 存在用户的时候， 返回 false
+func handleCheckUserIdNotExistHelper(user *userModel.User, c *gin.Context) bool {
+	if user.ID <= 0 {
+		c.JSON(http.StatusOK, gin.H{
+			"code":    -1,
+			"message": "缺少id",
+		})
+		return true
+	}
+
+	return false
+}
+
 // 判断用户是否存在
 func handleCheckUserExistHelper(user *userModel.User, c *gin.Context) bool {
 	resultUser, _ := user.FindUserByName(user.Name)

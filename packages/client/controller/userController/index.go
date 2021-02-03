@@ -40,10 +40,17 @@ func UpdateUser(c *gin.Context) {
 	var err error
 	user := &User{}
 
+	// 绑定参数
 	if handleBindUserHasErrorHelper(user, c) {
 		return
 	}
 
+	// 校验 id 是否存在
+	if handleCheckUserIdNotExistHelper(user, c) {
+		return
+	}
+
+	// 校验用户名是否重复
 	if handleCheckUserExistHelper(user, c) {
 		return
 	}
