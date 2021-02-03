@@ -1,7 +1,7 @@
 package e
 
 var MsgFlags = map[int]string{
-	Success:       "ok",
+	Success:       "success",
 	Error:         "fail",
 	InvalidParams: "请求参数错误",
 

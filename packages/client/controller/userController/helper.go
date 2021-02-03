@@ -40,9 +40,9 @@ func handleCheckUserExistHelper(user *userModel.User, c *gin.Context) bool {
 	resultUser, _ := user.FindUserByName(user.Name)
 	if resultUser.ID > 0 {
 		c.JSON(http.StatusOK, gin.H{
-			"code":    e.UserExist,
+			"code":    e.UserNameExist,
 			"name":    resultUser.Name,
-			"message": "用户名已经存在",
+			"message": e.GetMsg(e.UserNameExist),
 		})
 		return true
 	}

@@ -32,8 +32,8 @@ func CreateUser(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"code":    0,
-		"message": "创建用户成功",
+		"code":    e.Success,
+		"message": e.GetMsg(e.Success),
 	})
 }
 
@@ -59,14 +59,14 @@ func UpdateUser(c *gin.Context) {
 	err = user.Update()
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
-			"code":    -1,
-			"message": "更新失败",
+			"code":    e.Error,
+			"message": e.GetMsg(e.Error),
 		})
 		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"code":    0,
-		"message": "更新成功",
+		"code":    e.Success,
+		"message": e.GetMsg(e.Success),
 	})
 }
