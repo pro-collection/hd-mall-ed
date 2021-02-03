@@ -3,6 +3,7 @@ package userController
 import (
 	"github.com/gin-gonic/gin"
 	. "hd-mall-ed/packages/client/models/userModel"
+	"hd-mall-ed/packages/client/pkg/e"
 	"net/http"
 )
 
@@ -24,7 +25,7 @@ func CreateUser(c *gin.Context) {
 	err = user.CreateUser()
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
-			"code":    -1,
+			"code":    e.InvalidParams,
 			"message": "创建用户失败",
 		})
 		return
