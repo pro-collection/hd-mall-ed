@@ -3,7 +3,7 @@ package userController
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/ulule/deepcopier"
-	"hd-mall-ed/packages/client/database/tableModal"
+	"hd-mall-ed/packages/client/database/tableModel"
 	. "hd-mall-ed/packages/client/models/userModel"
 	"hd-mall-ed/packages/client/pkg/app"
 	"hd-mall-ed/packages/client/pkg/e"
@@ -68,7 +68,11 @@ func UpdateUser(c *gin.Context) {
 		return
 	}
 
-	err = user.Update()
+	// save 是全量更新
+	updateMap := make(map[string]interface{})
+	updateMap["password"] = user.Password
+
+	err = user.Update(updateMap)
 	if err != nil {
 		log.Println(err.Error())
 		api.ResFail(e.Fail)
@@ -83,7 +87,7 @@ func UpdateUser(c *gin.Context) {
 func GetUserInfo(c *gin.Context) {
 	userModal := &User{}
 	api := app.ApiFunction{C: c}
-	baseUser := &tableModal.BaseUser{}
+	baseUser := &tableModel.BaseUser{}
 
 	userId := c.DefaultQuery("id", "")
 	if userId == "" {

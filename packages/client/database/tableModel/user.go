@@ -1,4 +1,4 @@
-package tableModal
+package tableModel
 
 import (
 	"gorm.io/gorm"

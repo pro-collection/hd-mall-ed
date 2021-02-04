@@ -2,10 +2,10 @@ package userModel
 
 import (
 	"hd-mall-ed/packages/client/database"
-	"hd-mall-ed/packages/client/database/tableModal"
+	"hd-mall-ed/packages/client/database/tableModel"
 )
 
-type User tableModal.User
+type User tableModel.User
 
 // 创建用户
 func (user *User) CreateUser() (err error) {
@@ -40,10 +40,7 @@ func (*User) FindUserByName(name string) (User, error) {
 }
 
 // 更新方法
-func (user *User) Update() error {
-	// save 是全量更新
-	updateMap := make(map[string]interface{})
-	updateMap["password"] = user.Password
+func (user *User) Update(updateMap interface{}) error {
 	err := database.DataBase.Model(&User{}).Where("id = ?", user.ID).Updates(updateMap).Error
 	return err
 }
