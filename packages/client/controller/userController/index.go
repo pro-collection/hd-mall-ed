@@ -7,6 +7,7 @@ import (
 	. "hd-mall-ed/packages/client/models/userModel"
 	"hd-mall-ed/packages/client/pkg/app"
 	"hd-mall-ed/packages/client/pkg/e"
+	"log"
 	"net/http"
 	"strconv"
 )
@@ -63,6 +64,7 @@ func UpdateUser(c *gin.Context) {
 
 	err = user.Update()
 	if err != nil {
+		log.Println(err.Error())
 		api.ResFail(e.Fail)
 		return
 	}

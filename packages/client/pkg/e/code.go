@@ -12,6 +12,7 @@ const (
 	CreateUserFail = 20001
 	UserExist      = 20002
 	UserNameExist  = 20003
+	UpdateUserFail = 20004
 )
 
 var MsgFlags = map[int]string{
@@ -24,4 +25,5 @@ var MsgFlags = map[int]string{
 	CreateUserFail: "创建账号失败",
 	UserExist:      "用户已存在",
 	UserNameExist:  "用户名已存在",
+	UpdateUserFail: "更新用户失败",
 }
