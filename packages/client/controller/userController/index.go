@@ -6,6 +6,7 @@ import (
 	"hd-mall-ed/packages/client/pkg/app"
 	"hd-mall-ed/packages/client/pkg/e"
 	"net/http"
+	"strconv"
 )
 
 // 创建用户信息
@@ -71,9 +72,18 @@ func UpdateUser(c *gin.Context) {
 
 // 查询用户信息， 需要登录 和 权限验证
 func GetUserInfo(c *gin.Context) {
+	// todo
 	var err error
 	user := &User{}
 
 	userId := c.DefaultQuery("id", "")
+	if userId == "" {
+		app.ResFail(c, e.InvalidParams)
+		return
+	}
 
+	id, _ := strconv.Atoi(userId)
+
+	// 问题类型转换
+	user.FindUserById(id.(uint))
 }
