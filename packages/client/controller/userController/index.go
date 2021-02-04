@@ -7,6 +7,7 @@ import (
 	. "hd-mall-ed/packages/client/models/userModel"
 	"hd-mall-ed/packages/client/pkg/app"
 	"hd-mall-ed/packages/client/pkg/e"
+	"hd-mall-ed/packages/client/service/userService"
 	"log"
 	"net/http"
 	"strconv"
@@ -68,11 +69,8 @@ func UpdateUser(c *gin.Context) {
 		return
 	}
 
-	// save 是全量更新
-	updateMap := make(map[string]interface{})
-	updateMap["password"] = user.Password
-
-	err = user.Update(updateMap)
+	// 更新的业务逻辑
+	err = userService.UserUpdate(user)
 	if err != nil {
 		log.Println(err.Error())
 		api.ResFail(e.Fail)
