@@ -13,3 +13,15 @@ const (
 	UserExist      = 20002
 	UserNameExist  = 20003
 )
+
+var MsgFlags = map[int]string{
+	Success:       "success",
+	Fail:          "Fail",
+	InvalidParams: "请求参数错误",
+
+	NotFoundId: "缺少id",
+
+	CreateUserFail: "创建账号失败",
+	UserExist:      "用户已存在",
+	UserNameExist:  "用户名已存在",
+}
