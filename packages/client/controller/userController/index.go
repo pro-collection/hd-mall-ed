@@ -2,6 +2,8 @@ package userController
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/ulule/deepcopier"
+	"hd-mall-ed/packages/client/database/tableModal"
 	. "hd-mall-ed/packages/client/models/userModel"
 	"hd-mall-ed/packages/client/pkg/app"
 	"hd-mall-ed/packages/client/pkg/e"
@@ -41,6 +43,7 @@ func CreateUser(c *gin.Context) {
 
 func UpdateUser(c *gin.Context) {
 	var err error
+	api := app.ApiFunction{C: c}
 	user := &User{}
 
 	// 绑定参数
@@ -60,7 +63,7 @@ func UpdateUser(c *gin.Context) {
 
 	err = user.Update()
 	if err != nil {
-		app.ResFail(c, e.Fail)
+		api.ResFail(e.Fail)
 		return
 	}
 
@@ -73,10 +76,12 @@ func UpdateUser(c *gin.Context) {
 // 查询用户信息， 需要登录 和 权限验证
 func GetUserInfo(c *gin.Context) {
 	userModal := &User{}
+	api := app.ApiFunction{C: c}
+	baseUser := &tableModal.BaseUser{}
 
 	userId := c.DefaultQuery("id", "")
 	if userId == "" {
-		app.ResFail(c, e.InvalidParams)
+		api.ResFail(e.InvalidParams)
 		return
 	}
 
@@ -85,9 +90,10 @@ func GetUserInfo(c *gin.Context) {
 	// 问题类型转换
 	user, err := userModal.FindUserById(uint(id))
 	if err != nil {
-		app.ResFailMessage(c, e.Fail, err.Error())
+		api.ResFailMessage(e.Fail, err.Error())
 		return
 	}
 
-
+	_ = deepcopier.Copy(user).To(baseUser)
+	api.Response(e.Success, baseUser)
 }

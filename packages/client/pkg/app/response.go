@@ -6,9 +6,13 @@ import (
 	"net/http"
 )
 
+type ApiFunction struct {
+	C *gin.Context
+}
+
 // 公用的返回
-func Response(code int, data interface{}, c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
+func (api *ApiFunction) Response(code int, data interface{}) {
+	api.C.JSON(http.StatusOK, gin.H{
 		"code":    code,
 		"message": e.GetMsg(code),
 		"data":    data,
@@ -16,16 +20,16 @@ func Response(code int, data interface{}, c *gin.Context) {
 }
 
 // 失败的返回
-func ResFail(c *gin.Context, code int) {
-	c.JSON(http.StatusOK, gin.H{
+func (api *ApiFunction) ResFail(code int) {
+	api.C.JSON(http.StatusOK, gin.H{
 		"code":    code,
 		"message": e.GetMsg(code),
 	})
 }
 
 // 返回失败
-func ResFailMessage(c *gin.Context, code int, message string) {
-	c.JSON(http.StatusOK, gin.H{
+func (api *ApiFunction) ResFailMessage(code int, message string) {
+	api.C.JSON(http.StatusOK, gin.H{
 		"code":    code,
 		"message": message,
 	})
