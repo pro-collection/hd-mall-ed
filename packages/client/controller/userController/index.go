@@ -74,6 +74,7 @@ func UpdateUser(c *gin.Context) {
 }
 
 // 查询用户信息， 需要登录 和 权限验证
+// 只能查询自己的用户信息
 func GetUserInfo(c *gin.Context) {
 	userModal := &User{}
 	api := app.ApiFunction{C: c}

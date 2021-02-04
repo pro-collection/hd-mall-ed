@@ -2,7 +2,6 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"hd-mall-ed/packages/client/controller/userController"
 )
 
 func SetUpRouter() *gin.Engine {
@@ -10,11 +9,8 @@ func SetUpRouter() *gin.Engine {
 
 	index := router.Group("/api")
 	{
-		userRouter := index.Group("/user")
-		{
-			userRouter.POST("/create", userController.CreateUser)
-			userRouter.POST("/update", userController.UpdateUser)
-		}
+		// user 相关的接口
+		userRouter(index)
 	}
 
 	return router
