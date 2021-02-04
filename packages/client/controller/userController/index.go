@@ -72,9 +72,7 @@ func UpdateUser(c *gin.Context) {
 
 // 查询用户信息， 需要登录 和 权限验证
 func GetUserInfo(c *gin.Context) {
-	// todo
-	var err error
-	user := &User{}
+	userModal := &User{}
 
 	userId := c.DefaultQuery("id", "")
 	if userId == "" {
@@ -85,5 +83,10 @@ func GetUserInfo(c *gin.Context) {
 	id, _ := strconv.Atoi(userId)
 
 	// 问题类型转换
-	user.FindUserById(id.(uint))
+	user, err := userModal.FindUserById(uint(id))
+	if err != nil {
+		app.ResFailMessage(c, e.Fail, err.Error())
+		return
+	}
+
 }

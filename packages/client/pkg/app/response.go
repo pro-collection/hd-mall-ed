@@ -22,3 +22,11 @@ func ResFail(c *gin.Context, code int) {
 		"message": e.GetMsg(code),
 	})
 }
+
+// 返回失败
+func ResFailMessage(c *gin.Context, code int, message string) {
+	c.JSON(http.StatusOK, gin.H{
+		"code":    code,
+		"message": message,
+	})
+}
