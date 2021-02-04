@@ -69,10 +69,7 @@ func UpdateUser(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"code":    e.Success,
-		"message": e.GetMsg(e.Success),
-	})
+	api.ResponseNoData()
 }
 
 // 查询用户信息， 需要登录 和 权限验证
@@ -98,5 +95,5 @@ func GetUserInfo(c *gin.Context) {
 	}
 
 	_ = deepcopier.Copy(user).To(baseUser)
-	api.Response(e.Success, baseUser)
+	api.Response(baseUser)
 }

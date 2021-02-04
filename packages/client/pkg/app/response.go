@@ -11,11 +11,19 @@ type ApiFunction struct {
 }
 
 // 公用的返回
-func (api *ApiFunction) Response(code int, data interface{}) {
+func (api *ApiFunction) Response( data interface{}) {
 	api.C.JSON(http.StatusOK, gin.H{
-		"code":    code,
-		"message": e.GetMsg(code),
+		"code":    e.Success,
+		"message": e.GetMsg(e.Success),
 		"data":    data,
+	})
+}
+
+// 公共返回没有data的场景
+func (api *ApiFunction) ResponseNoData() {
+	api.C.JSON(http.StatusOK, gin.H{
+		"code":    e.Success,
+		"message": e.GetMsg(e.Success),
 	})
 }
 
