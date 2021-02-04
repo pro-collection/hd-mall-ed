@@ -15,10 +15,16 @@ import (
 // 创建用户信息
 func CreateUser(c *gin.Context) {
 	var err error
+	api := app.ApiFunction{C: c}
 	user := &User{}
 
 	// 绑定user信息， 以及参数校验
 	if handleBindUserHasErrorHelper(user, c) {
+		return
+	}
+
+	if user.Name == "" {
+		api.ResFail(e.InvalidParams)
 		return
 	}
 

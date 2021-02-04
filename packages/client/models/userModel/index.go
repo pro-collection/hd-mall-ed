@@ -41,6 +41,9 @@ func (*User) FindUserByName(name string) (User, error) {
 
 // 更新方法
 func (user *User) Update() error {
-	err := database.DataBase.Save(user).Error
+	// save 是全量更新
+	updateMap := make(map[string]interface{})
+	updateMap["password"] = user.Password
+	err := database.DataBase.Model(&User{}).Where("id = ?", user.ID).Updates(updateMap).Error
 	return err
 }

@@ -1,6 +1,8 @@
 package tableModal
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+)
 
 type BaseUser struct {
 	Name             string `json:"name" gorm:"not null"`
