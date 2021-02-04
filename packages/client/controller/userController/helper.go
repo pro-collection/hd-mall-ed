@@ -13,7 +13,7 @@ func handleBindUserHasErrorHelper(user *userModel.User, c *gin.Context) bool {
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code":    e.InvalidParams,
-			"message": e.GetMsg(e.InvalidParams),
+			"message": err.Error(),
 		})
 		return true
 	}

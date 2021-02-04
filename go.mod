@@ -14,7 +14,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/thoas/go-funk v0.7.0 // indirect
 	github.com/ugorji/go v1.2.3 // indirect
-	github.com/ulule/deepcopier v0.0.0-20200430083143-45decc6639b6 // indirect
+	github.com/ulule/deepcopier v0.0.0-20200430083143-45decc6639b6
 	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad // indirect
 	golang.org/x/sys v0.0.0-20210123231150-1d476976d117 // indirect
 	google.golang.org/protobuf v1.25.0 // indirect
