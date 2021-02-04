@@ -59,11 +59,7 @@ func UpdateUser(c *gin.Context) {
 
 	err = user.Update()
 	if err != nil {
-		//c.JSON(http.StatusOK, gin.H{
-		//	"code":    e.Error,
-		//	"message": e.GetMsg(e.Error),
-		//})
-		app.Response(e.Error, nil, c)
+		app.ResFail(c, e.Fail)
 		return
 	}
 
@@ -71,4 +67,13 @@ func UpdateUser(c *gin.Context) {
 		"code":    e.Success,
 		"message": e.GetMsg(e.Success),
 	})
+}
+
+// 查询用户信息， 需要登录 和 权限验证
+func GetUserInfo(c *gin.Context) {
+	var err error
+	user := &User{}
+
+	userId := c.DefaultQuery("id", "")
+
 }

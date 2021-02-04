@@ -14,3 +14,11 @@ func Response(code int, data interface{}, c *gin.Context) {
 		"data":    data,
 	})
 }
+
+// 失败的返回
+func ResFail(c *gin.Context, code int) {
+	c.JSON(http.StatusOK, gin.H{
+		"code":    code,
+		"message": e.GetMsg(code),
+	})
+}

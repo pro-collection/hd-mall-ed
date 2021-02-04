@@ -3,6 +3,7 @@ package e
 const (
 	Success       = 0
 	Error         = 500
+	Fail          = 500
 	InvalidParams = 400
 
 	NotFoundId = 10001
