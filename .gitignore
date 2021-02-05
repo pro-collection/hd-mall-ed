@@ -21,7 +21,7 @@ coverage/
 .idea
 .idea/
 
-app-local.ini
+app_local.ini
 
 
 npm-debug.log*
