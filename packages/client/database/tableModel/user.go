@@ -6,7 +6,7 @@ import (
 
 type BaseUser struct {
 	Name             string `json:"name" gorm:"not null"`
-	Integral         uint   `json:"integral" gorm:"comment:积分"`
+	Integral         uint   `json:"integral" gorm:"comment:积分;index"`
 	DefaultAddressId uint   `json:"default_address_id" gorm:"comment:默认地址"`
 	Avatar           string `json:"avatar" gorm:"comment:头像"`
 	Email            string `json:"email" gorm:"comment:邮箱"`
