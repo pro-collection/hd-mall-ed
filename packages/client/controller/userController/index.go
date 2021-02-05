@@ -98,6 +98,7 @@ func GetUserInfo(c *gin.Context) {
 	// 问题类型转换
 	user, err := userModal.FindUserById(uint(id))
 	if err != nil {
+		log.Println(err.Error())
 		api.ResFailMessage(e.Fail, err.Error())
 		return
 	}
