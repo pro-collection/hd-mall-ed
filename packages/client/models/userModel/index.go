@@ -15,7 +15,7 @@ func (user *User) CreateUser() (err error) {
 
 // 查找user
 func (user *User) FindUser() User {
-	database.DataBase.First(&user)
+	database.DataBase.First(user)
 	return *user
 }
 
