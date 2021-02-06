@@ -1,6 +1,8 @@
 package addressModel
 
 import (
+	"errors"
+	"github.com/thoas/go-funk"
 	"hd-mall-ed/packages/client/database"
 	"hd-mall-ed/packages/client/database/tableModel"
 	"hd-mall-ed/packages/client/models/userModel"
@@ -28,6 +30,15 @@ func (address *Address) FindAddressByUserId(userId uint) ([]tableModel.BaseAddre
 		return addressList, err
 	}
 	return addressList, nil
+}
+
+// 创建用户收件地址
+func (address *Address) CreateAddress() error {
+	// 必须要要求有 user_id
+	if funk.IsEmpty(address.UserId) {
+		return errors.New("user_id 不存在")
+	}
+	return database.DataBase.Create(address).Error
 }
 
 // 更新默认地址
