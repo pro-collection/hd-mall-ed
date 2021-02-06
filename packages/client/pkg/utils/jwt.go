@@ -4,6 +4,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/tidwall/gjson"
 	"hd-mall-ed/packages/client/config"
+	"hd-mall-ed/packages/client/models/authModel"
 	"strings"
 	"time"
 )
@@ -53,7 +54,7 @@ func ParseToken(token string) (*Claims, error) {
 
 	id := gjson.Get(content, "id").Int()
 
-	user := models.GetAuthById(id)
+	user := authModel.GetAuthById(id)
 
 	// 通过密码动态授权
 	tokenClaims, err := jwt.ParseWithClaims(token, &Claims{}, func(token *jwt.Token) (interface{}, error) {
