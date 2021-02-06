@@ -11,7 +11,7 @@ type ApiFunction struct {
 }
 
 // 公用的返回
-func (api *ApiFunction) Response( data interface{}) {
+func (api *ApiFunction) Response(data interface{}) {
 	api.C.JSON(http.StatusOK, gin.H{
 		"code":    e.Success,
 		"message": e.GetMsg(e.Success),
