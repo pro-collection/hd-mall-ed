@@ -45,8 +45,3 @@ func (user *User) Update(updateMap interface{}) error {
 	return err
 }
 
-// 更新默认地址
-func (user *User) updateDefaultAddressId(addressId int) error {
-	err := database.DataBase.Model(&User{}).Where("id = ?", user.ID).Update("default_address_id", addressId).Error
-	return err
-}

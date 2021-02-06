@@ -3,6 +3,7 @@ package addressModel
 import (
 	"hd-mall-ed/packages/client/database"
 	"hd-mall-ed/packages/client/database/tableModel"
+	"hd-mall-ed/packages/client/models/userModel"
 )
 
 type Address tableModel.Address
@@ -27,4 +28,11 @@ func (address *Address) FindAddressByUserId(userId uint) ([]tableModel.BaseAddre
 		return addressList, err
 	}
 	return addressList, nil
+}
+
+// 更新默认地址
+// 独立的 service 方法
+func UpdateDefaultAddressId(userId, addressId int) error {
+	err := database.DataBase.Model(&userModel.User{}).Where("id = ?", userId).Update("default_address_id", addressId).Error
+	return err
 }
