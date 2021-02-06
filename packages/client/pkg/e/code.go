@@ -7,12 +7,14 @@ const (
 	InvalidParams = 400
 
 	NotFoundId = 10001
+	FailAuthCheckToken = 10002
+	FailAuthCheckTokenTimeout = 10003
 
 	// user 相关
 	CreateUserFail = 20001
 	UserExist      = 20002
-	UserNameExist  = 20003
 	UpdateUserFail = 20004
+	UserNameExist  = 20003
 )
 
 var MsgFlags = map[int]string{
@@ -21,6 +23,8 @@ var MsgFlags = map[int]string{
 	InvalidParams: "请求参数错误",
 
 	NotFoundId: "缺少id",
+	FailAuthCheckToken: "鉴权失败",
+	FailAuthCheckTokenTimeout: "token 超时",
 
 	CreateUserFail: "创建账号失败",
 	UserExist:      "用户已存在",
