@@ -16,7 +16,7 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
-func GenerateToken(username, password string, id int) (string, error) {
+func GenerateToken(username, password string, id int) (string, Claims, error) {
 	// 这个地方可以考虑通过密码动态授权
 	var jwtSecret = []byte(config.AppConfig.JwtSecret + password)
 
@@ -35,7 +35,7 @@ func GenerateToken(username, password string, id int) (string, error) {
 
 	tokenClaims := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	token, err := tokenClaims.SignedString(jwtSecret)
-	return token, err
+	return token, claims, err
 }
 
 func ParseToken(token string) (*Claims, error) {

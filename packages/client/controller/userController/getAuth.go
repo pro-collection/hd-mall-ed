@@ -27,12 +27,15 @@ func GetAuth(c *gin.Context) {
 	code := e.FailAuthToken
 	id, _ := authModel.CheckAuth(auth.Username, auth.Password)
 	if id > 0 {
-		token, err := utils.GenerateToken(auth.Username, auth.Password, id)
+		token, claims, err := utils.GenerateToken(auth.Username, auth.Password, id)
 
 		if err != nil {
 			code = e.FailAuthTokenCreate
 		} else {
 			data["token"] = token
+
+			// 设置 cookie
+			c.SetCookie("token", token, int(claims.ExpiresAt), "", "", false, false)
 			code = e.Success
 		}
 	}
