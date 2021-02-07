@@ -6,10 +6,6 @@ import (
 	"net/http"
 )
 
-type ApiFunction struct {
-	C *gin.Context
-}
-
 // 公用的返回
 func (api *ApiFunction) Response(data interface{}) {
 	api.C.JSON(http.StatusOK, gin.H{
