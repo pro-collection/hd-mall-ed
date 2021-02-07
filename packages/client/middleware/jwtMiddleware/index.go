@@ -19,7 +19,11 @@ func Jwt() gin.HandlerFunc {
 		code = e.Success
 
 		// 需要从 cookie 中获取
-		token := c.DefaultQuery("token", "")
+		token, err := c.Cookie("token")
+		if err != nil {
+			code = e.FailAuthCheckToken
+		}
+
 		if funk.IsEmpty(token) {
 			code = e.FailAuthCheckToken
 		} else {

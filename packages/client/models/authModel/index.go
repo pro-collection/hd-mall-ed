@@ -7,7 +7,7 @@ import (
 
 type Auth struct {
 	Id       int    `json:"id" gorm:"primary_key"`
-	Username string `json:"username"`
+	Username string `json:"name"`
 	Password string `json:"password"`
 }
 
@@ -29,8 +29,9 @@ func CheckAuth(username, password string) (int, error) {
 	return -1, err
 }
 
-func GetAuthById(id int64) Auth {
-	var auth Auth
-	database.DataBase.Where("id = ?", id).First(&auth)
-	return auth
+func GetAuthById(id int64) userModel.User {
+	var user userModel.User
+	// todo 这个地方接受参数的时候有点儿问题
+	database.DataBase.Where("id = ?", id).First(&user)
+	return user
 }
