@@ -44,5 +44,4 @@ func GetAuth(c *gin.Context) {
 
 	// error 的返回
 	api.ResFail(code)
-
 }
