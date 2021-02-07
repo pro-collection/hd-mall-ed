@@ -15,7 +15,6 @@ func Jwt() gin.HandlerFunc {
 		api := app.ApiFunction{C: c}
 
 		var code int
-		var data interface{}
 
 		code = e.Success
 
@@ -34,7 +33,7 @@ func Jwt() gin.HandlerFunc {
 		}
 
 		if code != e.Success {
-			api.Response(data)
+			api.ResFail(code)
 			c.Abort()
 			return
 		}
