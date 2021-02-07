@@ -11,7 +11,7 @@ func SetUpRouter() *gin.Engine {
 	index := router.Group("/api")
 	{
 		// auth
-		index.GET("/auth", userController.GetAuth)
+		index.POST("/auth", userController.GetAuth)
 
 		// user 相关的接口
 		userRouter(index)
