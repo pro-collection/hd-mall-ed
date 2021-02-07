@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	"hd-mall-ed/packages/client/controller/userController"
 )
 
 func SetUpRouter() *gin.Engine {
@@ -9,6 +10,9 @@ func SetUpRouter() *gin.Engine {
 
 	index := router.Group("/api")
 	{
+		// auth
+		index.GET("/auth", userController.GetAuth)
+
 		// user 相关的接口
 		userRouter(index)
 	}
