@@ -13,9 +13,14 @@ type Auth struct {
 
 func CheckAuth(username, password string) (int, error) {
 	var auth Auth
+	queryMap := map[string]interface{}{
+		"name":     username,
+		"password": password,
+	}
+
 	err := database.DataBase.Model(&userModel.User{}).
 		Select("id").
-		Where(Auth{Username: username, Password: password}).
+		Where(queryMap).
 		First(&auth).Error
 
 	if auth.Id > 0 {
