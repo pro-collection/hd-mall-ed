@@ -25,7 +25,12 @@ func GetAuth(c *gin.Context) {
 
 	data := make(map[string]interface{})
 	code := e.FailAuthToken
-	id, _ := authModel.CheckAuth(auth.Username, auth.Password)
+	 id, err := authModel.CheckAuth(auth.Username, auth.Password)
+	if err != nil {
+		api.ResFailMessage(e.FailAuthCheckToken, err.Error())
+		return
+	}
+
 	if id > 0 {
 		token, claims, err := utils.GenerateToken(auth.Username, auth.Password, id)
 

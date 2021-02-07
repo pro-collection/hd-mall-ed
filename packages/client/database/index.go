@@ -67,7 +67,7 @@ func SetUp() {
 	}
 
 	// 初始化表
-	autoMigrateTable()
+	// autoMigrateTable()
 
 	// SetMaxIdleConns 设置空闲连接池中连接的最大数量
 	sqlDB.SetMaxIdleConns(10)

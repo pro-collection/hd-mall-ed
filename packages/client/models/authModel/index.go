@@ -1,6 +1,9 @@
 package authModel
 
-import "hd-mall-ed/packages/client/database"
+import (
+	"hd-mall-ed/packages/client/database"
+	"hd-mall-ed/packages/client/models/userModel"
+)
 
 type Auth struct {
 	Id       int    `json:"id" gorm:"primary_key"`
@@ -10,9 +13,11 @@ type Auth struct {
 
 func CheckAuth(username, password string) (int, error) {
 	var auth Auth
-	err := database.DataBase.Select("id").
+	err := database.DataBase.Model(&userModel.User{}).
+		Select("id").
 		Where(Auth{Username: username, Password: password}).
 		First(&auth).Error
+
 	if auth.Id > 0 {
 		return auth.Id, nil
 	}
