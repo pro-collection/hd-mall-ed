@@ -21,7 +21,7 @@ func Jwt() gin.HandlerFunc {
 		// 需要从 cookie 中获取
 		token := c.DefaultQuery("token", "")
 		if funk.IsEmpty(token) {
-			code = e.InvalidParams
+			code = e.FailAuthCheckToken
 		} else {
 			claims, err := utils.ParseToken(token)
 			if err != nil {
