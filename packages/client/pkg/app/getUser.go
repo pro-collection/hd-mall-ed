@@ -1,7 +1,6 @@
 package app
 
 import (
-	"hd-mall-ed/packages/client/database"
 	"hd-mall-ed/packages/client/models/userModel"
 	"hd-mall-ed/packages/client/pkg/utils/jwtUtil"
 )
@@ -14,17 +13,12 @@ func (api *ApiFunction) GetUser() (userModel.User, error) {
 	if err != nil {
 		return user, err
 	}
-	claims, err2 := jwtUtil.ParseToken(token)
-	if err2 != nil {
-		return user, err2
-	}
 
-	err = database.DataBase.Model(&userModel.User{}).
-		Where("id = ?", claims.Id).
-		First(&user).
-		Error
+	user, err = jwtUtil.ParseTokenGetUser(token)
+
 	if err != nil {
 		return user, err
 	}
+
 	return user, nil
 }
