@@ -38,6 +38,8 @@ type Database struct {
 	Host        string
 	Name        string
 	TablePrefix string
+	RedisHost   string
+	RedisExpire time.Duration
 }
 
 var DatabaseConfig = &Database{}
@@ -62,8 +64,10 @@ func SetUp() {
 	ServerConfig.ReadTimeout = ServerConfig.ReadTimeout * time.Second
 	ServerConfig.WriteTimeout = ServerConfig.WriteTimeout * time.Second
 
+	// 数据库相关配置
 	err = appConfig.Section("database").MapTo(DatabaseConfig)
 	if err != nil {
 		log.Fatalf("config mapTo DatabaseSetting err: %v", err)
 	}
+	DatabaseConfig.RedisExpire = DatabaseConfig.RedisExpire * time.Hour
 }
