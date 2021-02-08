@@ -21,7 +21,7 @@ func GenerateToken(username, password string, id int) (string, Claims, error) {
 	var jwtSecret = []byte(config.AppConfig.JwtSecret + password)
 
 	nowTime := time.Now()
-	expireTime := nowTime.Add(3 * time.Hour)
+	expireTime := nowTime.Add(config.DatabaseConfig.RedisExpire)
 
 	claims := Claims{
 		username,
