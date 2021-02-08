@@ -6,7 +6,7 @@ import (
 	"hd-mall-ed/packages/client/models/authModel"
 	"hd-mall-ed/packages/client/pkg/app"
 	"hd-mall-ed/packages/client/pkg/e"
-	"hd-mall-ed/packages/client/pkg/utils"
+	"hd-mall-ed/packages/client/pkg/utils/jwtUtil"
 	"strings"
 )
 
@@ -32,7 +32,7 @@ func GetAuth(c *gin.Context) {
 	}
 
 	if id > 0 {
-		token, claims, err := utils.GenerateToken(auth.Name, auth.Password, id)
+		token, claims, err := jwtUtil.GenerateToken(auth.Name, auth.Password, id)
 
 		if err != nil {
 			code = e.FailAuthTokenCreate

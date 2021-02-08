@@ -1,11 +1,11 @@
-package utils
+package jwtUtil
 
 import (
+	"errors"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/tidwall/gjson"
 	"hd-mall-ed/packages/client/config"
 	"hd-mall-ed/packages/client/models/authModel"
-	"strings"
+	"hd-mall-ed/packages/client/models/userModel"
 	"time"
 )
 
@@ -39,20 +39,7 @@ func GenerateToken(username, password string, id int) (string, Claims, error) {
 }
 
 func ParseToken(token string) (*Claims, error) {
-	payload := strings.Split(token, ".")
-
-	// 获取token 的中间段信息
-	bytes, e := jwt.DecodeSegment(payload[1])
-
-	if e != nil {
-		println(e.Error())
-	}
-	content := ""
-	for i := 0; i < len(bytes); i++ {
-		content += string(bytes[i])
-	}
-
-	id := gjson.Get(content, "id").Int()
+	id := handleGetIdHelper(token)
 
 	user := authModel.GetAuthById(id)
 
@@ -66,4 +53,15 @@ func ParseToken(token string) (*Claims, error) {
 		}
 	}
 	return nil, err
+}
+
+// 通过 token 获取用户信息
+func ParseTokenGetUser(token string) (userModel.User, error) {
+	id := handleGetIdHelper(token)
+
+	user := authModel.GetAuthById(id)
+	if user.ID > 0 {
+		return user, nil
+	}
+	return user, errors.New("获取用户信息事变")
 }

@@ -5,7 +5,7 @@ import (
 	"github.com/thoas/go-funk"
 	"hd-mall-ed/packages/client/pkg/app"
 	"hd-mall-ed/packages/client/pkg/e"
-	"hd-mall-ed/packages/client/pkg/utils"
+	"hd-mall-ed/packages/client/pkg/utils/jwtUtil"
 	"time"
 )
 
@@ -27,7 +27,7 @@ func Jwt() gin.HandlerFunc {
 		if funk.IsEmpty(token) {
 			code = e.FailAuthCheckToken
 		} else {
-			claims, err := utils.ParseToken(token)
+			claims, err := jwtUtil.ParseToken(token)
 			if err != nil {
 				code = e.FailAuthCheckToken
 			} else if time.Now().Unix() > claims.ExpiresAt {

@@ -40,7 +40,7 @@ func CheckAuth(username, password string) (int, error) {
 
 func GetAuthById(id int64) userModel.User {
 	var user userModel.User
-	// todo 这个地方接受参数的时候有点儿问题
+	// 获取鉴权
 	userJsonString, err := cache.Manager.Get(strconv.Itoa(int(id)))
 	if err != nil {
 		return user

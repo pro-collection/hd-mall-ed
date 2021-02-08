@@ -3,7 +3,7 @@ package app
 import (
 	"hd-mall-ed/packages/client/database"
 	"hd-mall-ed/packages/client/models/userModel"
-	"hd-mall-ed/packages/client/pkg/utils"
+	"hd-mall-ed/packages/client/pkg/utils/jwtUtil"
 )
 
 // 通过 token 获取用户信息
@@ -14,7 +14,7 @@ func (api *ApiFunction) GetUser() (userModel.User, error) {
 	if err != nil {
 		return user, err
 	}
-	claims, err2 := utils.ParseToken(token)
+	claims, err2 := jwtUtil.ParseToken(token)
 	if err2 != nil {
 		return user, err2
 	}
