@@ -1,8 +1,11 @@
 package authModel
 
 import (
+	"encoding/json"
+	"hd-mall-ed/packages/client/config/cache"
 	"hd-mall-ed/packages/client/database"
 	"hd-mall-ed/packages/client/models/userModel"
+	"strconv"
 )
 
 type Auth struct {
@@ -22,6 +25,13 @@ func CheckAuth(username, password string) (int, error) {
 		Where(queryMap).
 		First(&user).Error
 
+	// 缓存
+	userBytes, _ := json.Marshal(user)
+	err = cache.Manager.Set(strconv.Itoa(int(user.ID)), string(userBytes), nil)
+	if err != nil {
+		return -1, err
+	}
+
 	if user.ID > 0 {
 		return int(user.ID), nil
 	}
@@ -31,6 +41,12 @@ func CheckAuth(username, password string) (int, error) {
 func GetAuthById(id int64) userModel.User {
 	var user userModel.User
 	// todo 这个地方接受参数的时候有点儿问题
-	database.DataBase.Where("id = ?", id).First(&user)
+	userJsonString, err := cache.Manager.Get(strconv.Itoa(int(id)))
+	if err != nil {
+		return user
+	}
+
+	_ = json.Unmarshal([]byte(userJsonString.(string)), &user)
+
 	return user
 }
