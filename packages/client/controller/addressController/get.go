@@ -2,9 +2,12 @@ package addressController
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/ulule/deepcopier"
+	"hd-mall-ed/packages/client/database/tableModel"
 	"hd-mall-ed/packages/client/models/addressModel"
 	"hd-mall-ed/packages/client/pkg/app"
 	"hd-mall-ed/packages/client/pkg/e"
+	"strconv"
 )
 
 // 通过 userid 查找所有的address
@@ -29,5 +32,23 @@ func GetAddressList(c *gin.Context) {
 }
 
 func GetAddressById(c *gin.Context) {
+	api := app.ApiFunction{C: c}
+	var err error
 
+	// 获取参数
+	id := c.DefaultQuery("id", "")
+	addressId, _ := strconv.Atoi(id)
+
+	// 获取user 信息
+	user, _ := api.GetUser()
+	model := &addressModel.Address{}
+	err = model.FindAddressById(uint(addressId), user.ID)
+	if err != nil {
+		api.ResFail(e.FindAddressFail)
+		return
+	}
+
+	address := tableModel.AddressBase{}
+	_ = deepcopier.Copy(model).To(&address)
+	api.Response(address)
 }

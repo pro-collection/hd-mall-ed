@@ -22,6 +22,7 @@ const (
 	// 地址相关
 	CreateAddressFail = 30001
 	CreateAddressLimit = 30002
+	FindAddressFail = 30003
 )
 
 var MsgFlags = map[int]string{
@@ -43,4 +44,5 @@ var MsgFlags = map[int]string{
 
 	CreateAddressFail: "创建地址失败",
 	CreateAddressLimit: "用户最多可以只能设置 20 个地址",
+	FindAddressFail: "查询地址失败",
 }

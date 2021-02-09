@@ -14,5 +14,7 @@ func addressRouter(router *gin.RouterGroup)  {
 		address.GET("/list", addressController.GetAddressList)
 		// 创建列表
 		address.POST("/create", addressController.Create)
+		// 通过 id 查询具体的地址
+		address.GET("/get", addressController.GetAddressById)
 	}
 }

@@ -11,9 +11,9 @@ import (
 type Address tableModel.Address
 
 // 通过 id 找地址
-func (address *Address) FindAddressById(id uint) error {
+func (address *Address) FindAddressById(addressId, userId uint) error {
 	// 主见查询
-	err := database.DataBase.First(&address, id).Error
+	err := database.DataBase.Where("user_id = ?", userId).First(&address, addressId).Error
 	if err != nil {
 		return err
 	}
