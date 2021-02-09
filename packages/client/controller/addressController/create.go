@@ -23,6 +23,12 @@ func Create(c *gin.Context) {
 
 	user, _ := api.GetUser()
 	model.UserId = user.ID
+	addressList, _ := model.FindAddressByUserId(user.ID)
+	if len(*addressList) > 20 {
+		api.ResFail(e.CreateAddressLimit)
+		return
+	}
+
 	err = model.CreateAddress()
 	if err != nil {
 		api.ResFail(e.CreateAddressFail)

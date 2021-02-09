@@ -20,7 +20,8 @@ const (
 	UserNameExist  = 20003
 
 	// 地址相关
-	CreateAddressFail = 30003
+	CreateAddressFail = 30001
+	CreateAddressLimit = 30002
 )
 
 var MsgFlags = map[int]string{
@@ -41,4 +42,5 @@ var MsgFlags = map[int]string{
 	UpdateUserFail: "更新用户失败",
 
 	CreateAddressFail: "创建地址失败",
+	CreateAddressLimit: "用户最多可以只能设置 20 个地址",
 }
