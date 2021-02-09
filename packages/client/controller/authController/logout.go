@@ -28,7 +28,7 @@ func Logout(c *gin.Context) {
 	userId := strconv.Itoa(int(user.ID))
 
 	// 移除 cookie
-	api.RemoveCookie(userId)
+	api.RemoveCookie("token")
 
 	// 移除 cache
 	err = cache.Manager.Delete(userId)
