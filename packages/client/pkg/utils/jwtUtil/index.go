@@ -63,5 +63,5 @@ func ParseTokenGetUser(token string) (userModel.User, error) {
 	if user.ID > 0 {
 		return user, nil
 	}
-	return user, errors.New("获取用户信息事变")
+	return user, errors.New("获取用户信息失败")
 }

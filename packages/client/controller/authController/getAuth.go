@@ -1,4 +1,4 @@
-package userController
+package authController
 
 import (
 	"github.com/asaskevich/govalidator"
@@ -40,7 +40,7 @@ func GetAuth(c *gin.Context) {
 			data["token"] = token
 
 			// 设置 cookie
-			c.SetCookie("token", token, int(claims.ExpiresAt), "", "", false, false)
+			api.SetCookie("token", token, int(claims.ExpiresAt))
 			code = e.Success
 		}
 	}

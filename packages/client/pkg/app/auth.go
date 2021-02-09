@@ -23,10 +23,10 @@ func (api *ApiFunction) GetUser() (userModel.User, error) {
 	return user, nil
 }
 
-func (api *ApiFunction) setCookie(key, value string, maxAge int) {
+func (api *ApiFunction) SetCookie(key, value string, maxAge int) {
 	api.C.SetCookie(key, value, maxAge, "", "", false, false)
 }
 
-func (api *ApiFunction) removeCookie(key string) {
+func (api *ApiFunction) RemoveCookie(key string) {
 	api.C.SetCookie(key, "", 0, "", "", false, false)
 }

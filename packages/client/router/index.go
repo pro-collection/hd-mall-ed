@@ -2,7 +2,6 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"hd-mall-ed/packages/client/controller/userController"
 )
 
 func SetUpRouter() *gin.Engine {
@@ -10,8 +9,8 @@ func SetUpRouter() *gin.Engine {
 
 	index := router.Group("/api")
 	{
-		// auth
-		index.POST("/auth", userController.GetAuth)
+		// 鉴权登录的相关接口
+		authRouter(index)
 
 		// user 相关的接口
 		userRouter(index)
