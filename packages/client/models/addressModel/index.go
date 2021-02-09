@@ -21,13 +21,13 @@ func (address *Address) FindAddressById(id uint) error {
 }
 
 // 通过 userid 查找关联的 地址列表
-func (address *Address) FindAddressByUserId(userId uint) (*[]tableModel.Address, error) {
-	var addressList []tableModel.Address
+func (address *Address) FindAddressByUserId(userId uint) (*[]tableModel.AddressBase, error) {
+	var addressList []tableModel.AddressBase
 	if funk.IsEmpty(userId) {
 		return nil, errors.New("user_id 不存在")
 	}
 
-	err := database.DataBase.Model(&Address{}).Where("user_id = ?", userId).Find(addressList).Error
+	err := database.DataBase.Model(&Address{}).Where("user_id = ?", userId).Find(&addressList).Error
 	if err != nil {
 		return &addressList, err
 	}

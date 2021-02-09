@@ -18,6 +18,9 @@ const (
 	UserExist      = 20002
 	UpdateUserFail = 20004
 	UserNameExist  = 20003
+
+	// 地址相关
+	CreateAddressFail = 30003
 )
 
 var MsgFlags = map[int]string{
@@ -36,4 +39,6 @@ var MsgFlags = map[int]string{
 	UserExist:      "用户已存在",
 	UserNameExist:  "用户名已存在",
 	UpdateUserFail: "更新用户失败",
+
+	CreateAddressFail: "创建地址失败",
 }
