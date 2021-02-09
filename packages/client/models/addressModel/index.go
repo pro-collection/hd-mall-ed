@@ -11,25 +11,27 @@ import (
 type Address tableModel.Address
 
 // 通过 id 找地址
-func (address *Address) FindAddressById(id uint) (tableModel.BaseAddress, error) {
-	resultAddress := tableModel.BaseAddress{}
+func (address *Address) FindAddressById(id uint) error {
 	// 主见查询
-	err := database.DataBase.First(&resultAddress, id).Error
+	err := database.DataBase.First(&address, id).Error
 	if err != nil {
-		return resultAddress, err
+		return err
 	}
-	return resultAddress, nil
+	return nil
 }
 
 // 通过 userid 查找关联的 地址列表
-func (address *Address) FindAddressByUserId(userId uint) ([]tableModel.BaseAddress, error) {
-	var addressList []tableModel.BaseAddress
+func (address *Address) FindAddressByUserId(userId uint) (*[]tableModel.Address, error) {
+	var addressList []tableModel.Address
+	if funk.IsEmpty(userId) {
+		return nil, errors.New("user_id 不存在")
+	}
 
 	err := database.DataBase.Model(&Address{}).Where("user_id = ?", userId).Find(addressList).Error
 	if err != nil {
-		return addressList, err
+		return &addressList, err
 	}
-	return addressList, nil
+	return &addressList, nil
 }
 
 // 创建用户收件地址

@@ -14,6 +14,9 @@ func SetUpRouter() *gin.Engine {
 
 		// user 相关的接口
 		userRouter(index)
+
+		// address 相关接口
+		addressRouter(index)
 	}
 
 	return router
