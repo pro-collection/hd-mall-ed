@@ -22,6 +22,9 @@ coverage/
 .idea/
 
 app_local.ini
+appLocal.ini
+appDev.ini
+appProd.ini
 
 
 npm-debug.log*
