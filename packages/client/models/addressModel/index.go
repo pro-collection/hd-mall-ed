@@ -43,9 +43,22 @@ func (address *Address) CreateAddress() error {
 	return database.DataBase.Create(address).Error
 }
 
+// 更新用户地址
+func (address *Address) UpdateAddress(updateParams UpdateRequestParamsStruct) error {
+	return database.DataBase.Model(&Address{}).Updates(updateParams).Error
+}
+
+// 删除用户地址
+func (address *Address) DeleteAddress() error {
+	return database.DataBase.Delete(address).Error
+}
+
 // 更新默认地址
 // 独立的 service 方法
-func UpdateDefaultAddressId(userId, addressId int) error {
-	err := database.DataBase.Model(&userModel.User{}).Where("id = ?", userId).Update("default_address_id", addressId).Error
+func (address *Address) UpdateDefaultAddressId(userId int) error {
+	err := database.DataBase.
+		Model(&userModel.User{}).
+		Where("id = ?", userId).
+		Update("default_address_id", address.ID).Error
 	return err
 }
