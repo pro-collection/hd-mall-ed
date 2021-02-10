@@ -12,6 +12,7 @@ const (
 	FailAuthTokenCreate = 10004
 	FailAuthToken = 10005
 	FailLoginStatus = 10006
+	FailBindJson = 10007
 
 	// user 相关
 	CreateUserFail = 20001
@@ -38,6 +39,7 @@ var MsgFlags = map[int]string{
 	FailAuthTokenCreate: "创建 token 失败",
 	FailAuthToken: "token 错误",
 	FailLoginStatus: "登录状态失效",
+	FailBindJson: "绑定参数错误",
 
 	CreateUserFail: "创建账号失败",
 	UserExist:      "用户已存在",
