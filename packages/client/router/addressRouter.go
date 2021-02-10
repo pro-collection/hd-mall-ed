@@ -6,7 +6,7 @@ import (
 	"hd-mall-ed/packages/client/middleware/jwtMiddleware"
 )
 
-func addressRouter(router *gin.RouterGroup)  {
+func addressRouter(router *gin.RouterGroup) {
 	address := router.Group("/address")
 	address.Use(jwtMiddleware.Jwt())
 	{
@@ -17,6 +17,10 @@ func addressRouter(router *gin.RouterGroup)  {
 		// 通过 id 查询具体的地址
 		address.GET("/get", addressController.GetAddressById)
 		// 修改地址
+		address.POST("/update", addressController.Update)
 		// 删除地址
+		address.POST("/delete", addressController.Delete)
+		// 修改默认地址
+		address.POST("/set_default")
 	}
 }
