@@ -23,6 +23,15 @@ func (api *ApiFunction) GetUser() (userModel.User, error) {
 	return user, nil
 }
 
+// 单独只获取用户的id
+func (api *ApiFunction) GetUserId() int {
+	user, err := api.GetUser()
+	if err != nil {
+		return -1
+	}
+	return int(user.ID)
+}
+
 func (api *ApiFunction) SetCookie(key, value string, maxAge int) {
 	api.C.SetCookie(key, value, maxAge, "", "", false, false)
 }
