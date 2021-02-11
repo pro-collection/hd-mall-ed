@@ -10,3 +10,5 @@ type UpdateRequestParamsStruct struct {
 type DeleteRequestParamsStruct struct {
 	Id int `json:"id" valid:"required~缺少 id 参数"`
 }
+
+type UpdateDefaultRequestParamsStruct = DeleteRequestParamsStruct

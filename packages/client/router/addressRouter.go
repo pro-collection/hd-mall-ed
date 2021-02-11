@@ -21,6 +21,6 @@ func addressRouter(router *gin.RouterGroup) {
 		// 删除地址
 		address.POST("/delete", addressController.Delete)
 		// 修改默认地址
-		address.POST("/set_default")
+		address.POST("/set_default", addressController.UpdateDefault)
 	}
 }

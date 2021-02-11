@@ -35,3 +35,30 @@ func Update(c *gin.Context) {
 
 	api.ResponseNoData()
 }
+
+func UpdateDefault(c *gin.Context) {
+	api := app.ApiFunction{C: c}
+	var err error
+	model := addressModel.Address{}
+
+	// 获取数据
+	params := addressModel.UpdateDefaultRequestParamsStruct{}
+	if err = c.ShouldBindJSON(params); err != nil {
+		api.ResFail(e.InvalidParams)
+		return
+	}
+
+	// 校验参数
+	if api.ValidateHasError(params) {
+		return
+	}
+
+	user, _ := api.GetUser()
+
+	// 更新默认地址
+	if err = model.UpdateDefaultAddressId(int(user.ID)); err != nil {
+		api.ResFail(e.AddressSetDefaultFail)
+		return
+	}
+	api.ResponseNoData()
+}
