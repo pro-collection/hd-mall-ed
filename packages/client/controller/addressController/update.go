@@ -17,7 +17,7 @@ func Update(c *gin.Context) {
 	err = c.ShouldBindJSON(&updateParams)
 
 	if err != nil {
-		api.ResFail(e.InvalidParams)
+		api.ResFail(e.FailBindJson)
 		return
 	}
 
@@ -26,10 +26,8 @@ func Update(c *gin.Context) {
 		return
 	}
 
-	// 更新数据
-	err = model.UpdateAddress(updateParams)
-	if err != nil {
-		api.ResFail(e.AddressUpdateFail)
+	// 更新的业务逻辑
+	if handleUpdateAddressHelper(handleUpdateAddressHelperOptions{&api, &model, &updateParams}) {
 		return
 	}
 

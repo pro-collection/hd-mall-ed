@@ -27,6 +27,7 @@ const (
 	AddressUpdateFail     = 30004
 	AddressDeleteFail     = 30005
 	AddressSetDefaultFail = 30006
+	AddressNotExist       = 30007
 )
 
 var MsgFlags = map[int]string{
@@ -53,4 +54,5 @@ var MsgFlags = map[int]string{
 	AddressUpdateFail:     "更新地址失败",
 	AddressDeleteFail:     "删除地址失败",
 	AddressSetDefaultFail: "设置默认地址失败",
+	AddressNotExist:       "当前地址不存在",
 }

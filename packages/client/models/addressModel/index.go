@@ -21,7 +21,7 @@ func (address *Address) FindAddressById(addressId, userId uint) error {
 }
 
 // 通过 userid 查找关联的 地址列表
-func (address *Address) FindAddressByUserId(userId uint) (*[]tableModel.AddressBase, error) {
+func (*Address) FindAddressByUserId(userId uint) (*[]tableModel.AddressBase, error) {
 	var addressList []tableModel.AddressBase
 	if funk.IsEmpty(userId) {
 		return nil, errors.New("user_id 不存在")
@@ -44,8 +44,9 @@ func (address *Address) CreateAddress() error {
 }
 
 // 更新用户地址
-func (address *Address) UpdateAddress(updateParams UpdateRequestParamsStruct) error {
-	return database.DataBase.Model(&Address{}).Updates(updateParams).Error
+func (*Address) UpdateAddress(updateParams *UpdateRequestParamsStruct) error {
+	// 首先要找到当前id才能更新
+	return database.DataBase.Model(&Address{}).Updates(&updateParams).Error
 }
 
 // 删除用户地址
