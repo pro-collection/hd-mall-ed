@@ -53,7 +53,8 @@ func UpdateDefault(c *gin.Context) {
 
 	// 获取数据
 	params := addressModel.UpdateDefaultRequestParamsStruct{}
-	if err = c.ShouldBindJSON(params); err != nil {
+	if err = c.ShouldBindJSON(&params); err != nil {
+		log.Println(err)
 		api.ResFail(e.InvalidParams)
 		return
 	}
@@ -64,6 +65,7 @@ func UpdateDefault(c *gin.Context) {
 	}
 
 	user, _ := api.GetUser()
+	model.ID = uint(params.Id)
 
 	// 更新默认地址
 	if err = model.UpdateDefaultAddressId(int(user.ID)); err != nil {
