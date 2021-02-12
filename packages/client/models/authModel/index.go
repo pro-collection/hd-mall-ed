@@ -2,9 +2,9 @@ package authModel
 
 import (
 	"encoding/json"
-	"hd-mall-ed/packages/client/config/cache"
-	"hd-mall-ed/packages/client/database"
 	"hd-mall-ed/packages/client/models/userModel"
+	"hd-mall-ed/packages/common/config/cache"
+	"hd-mall-ed/packages/common/database"
 	"strconv"
 )
 

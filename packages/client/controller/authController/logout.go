@@ -2,10 +2,10 @@ package authController
 
 import (
 	"github.com/gin-gonic/gin"
-	"hd-mall-ed/packages/client/config/cache"
 	"hd-mall-ed/packages/client/pkg/app"
 	"hd-mall-ed/packages/client/pkg/e"
 	"hd-mall-ed/packages/client/pkg/utils/jwtUtil"
+	"hd-mall-ed/packages/common/config/cache"
 	"strconv"
 )
 

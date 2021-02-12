@@ -1,8 +1,8 @@
 package userModel
 
 import (
-	"hd-mall-ed/packages/client/database"
-	"hd-mall-ed/packages/client/database/tableModel"
+	"hd-mall-ed/packages/common/database"
+	"hd-mall-ed/packages/common/database/tableModel"
 )
 
 type User tableModel.User

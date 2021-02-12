@@ -1,7 +1,7 @@
 package database
 
 import (
-	"hd-mall-ed/packages/client/database/tableModel"
+	"hd-mall-ed/packages/common/database/tableModel"
 	"log"
 )
 

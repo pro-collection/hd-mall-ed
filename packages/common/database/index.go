@@ -7,7 +7,7 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
-	"hd-mall-ed/packages/client/config"
+	"hd-mall-ed/packages/common/config"
 	"log"
 	"os"
 	"time"

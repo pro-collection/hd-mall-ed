@@ -1,9 +1,8 @@
 package categoryModel
 
 import (
-	"github.com/ulule/deepcopier"
-	"hd-mall-ed/packages/client/database"
-	"hd-mall-ed/packages/client/database/tableModel"
+	"hd-mall-ed/packages/common/database"
+	"hd-mall-ed/packages/common/database/tableModel"
 )
 
 type Category tableModel.Category
@@ -24,9 +23,7 @@ func (category *Category) Get() ([]*tableModel.CategoryBase, error) {
 
 // 更新
 func (category *Category) Update() error {
-	baseModel := tableModel.CategoryBase{}
-	_ = deepcopier.Copy(category).To(&baseModel)
-	return database.DataBase.Updates(baseModel).Error
+	return database.DataBase.Model(&Category{}).Updates(&category).Error
 }
 
 // 删除

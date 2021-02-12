@@ -3,10 +3,10 @@ package addressController
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/ulule/deepcopier"
-	"hd-mall-ed/packages/client/database/tableModel"
 	"hd-mall-ed/packages/client/models/addressModel"
 	"hd-mall-ed/packages/client/pkg/app"
 	"hd-mall-ed/packages/client/pkg/e"
+	"hd-mall-ed/packages/common/database/tableModel"
 	"strconv"
 )
 

@@ -4,7 +4,7 @@ import (
 	"github.com/eko/gocache/cache"
 	"github.com/eko/gocache/store"
 	"github.com/go-redis/redis/v7"
-	"hd-mall-ed/packages/client/config"
+	"hd-mall-ed/packages/common/config"
 )
 
 var Manager *cache.Cache

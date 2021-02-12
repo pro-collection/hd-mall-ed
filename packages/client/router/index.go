@@ -17,6 +17,9 @@ func SetUpRouter() *gin.Engine {
 
 		// address 相关接口
 		addressRouter(index)
+
+		// category 商品分类
+
 	}
 
 	return router
