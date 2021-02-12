@@ -4,8 +4,8 @@ import (
 	"errors"
 	"github.com/dgrijalva/jwt-go"
 	"hd-mall-ed/packages/common/config"
-	"hd-mall-ed/packages/common/models/authModel"
-	"hd-mall-ed/packages/common/models/userModel"
+	"hd-mall-ed/packages/admin/models/authModel"
+	"hd-mall-ed/packages/admin/models/userModel"
 	"time"
 )
 

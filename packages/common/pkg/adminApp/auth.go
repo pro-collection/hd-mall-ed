@@ -1,7 +1,7 @@
 package adminApp
 
 import (
-	"hd-mall-ed/packages/common/models/userModel"
+	"hd-mall-ed/packages/admin/models/userModel"
 	"hd-mall-ed/packages/common/pkg/utils/jwtUtil"
 )
 

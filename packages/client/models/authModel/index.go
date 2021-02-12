@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"hd-mall-ed/packages/common/config/cache"
 	"hd-mall-ed/packages/common/database"
-	"hd-mall-ed/packages/common/models/userModel"
+	"hd-mall-ed/packages/admin/models/userModel"
 	"strconv"
 )
 

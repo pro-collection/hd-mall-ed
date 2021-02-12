@@ -3,9 +3,9 @@ package jwtUtil
 import (
 	"errors"
 	"github.com/dgrijalva/jwt-go"
+	"hd-mall-ed/packages/admin/models/adminAuthModel"
+	"hd-mall-ed/packages/admin/models/adminUserModel"
 	"hd-mall-ed/packages/common/config"
-	"hd-mall-ed/packages/common/models/adminAuthModel"
-	"hd-mall-ed/packages/common/models/adminUserModel"
 	"time"
 )
 

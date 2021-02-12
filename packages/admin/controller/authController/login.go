@@ -2,7 +2,7 @@ package authController
 
 import (
 	"github.com/gin-gonic/gin"
-	"hd-mall-ed/packages/common/models/adminAuthModel"
+	"hd-mall-ed/packages/admin/models/adminAuthModel"
 	"hd-mall-ed/packages/common/pkg/adminApp"
 	"hd-mall-ed/packages/common/pkg/e"
 	"hd-mall-ed/packages/common/pkg/utils/jwtUtil"

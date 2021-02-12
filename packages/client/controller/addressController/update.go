@@ -2,7 +2,7 @@ package addressController
 
 import (
 	"github.com/gin-gonic/gin"
-	"hd-mall-ed/packages/common/models/addressModel"
+	"hd-mall-ed/packages/admin/models/addressModel"
 	"hd-mall-ed/packages/common/pkg/app"
 	"hd-mall-ed/packages/common/pkg/e"
 	"log"

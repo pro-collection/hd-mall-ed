@@ -3,7 +3,7 @@ package authController
 import (
 	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
-	"hd-mall-ed/packages/common/models/authModel"
+	"hd-mall-ed/packages/admin/models/authModel"
 	"hd-mall-ed/packages/common/pkg/app"
 	"hd-mall-ed/packages/common/pkg/e"
 	"hd-mall-ed/packages/common/pkg/utils/jwtUtil"
