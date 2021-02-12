@@ -9,13 +9,6 @@ import (
 	"time"
 )
 
-type Claims struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-	Id       int    `json:"id"`
-	jwt.StandardClaims
-}
-
 func GenerateToken(username, password string, id int) (string, Claims, error) {
 	// 这个地方可以考虑通过密码动态授权
 	var jwtSecret = []byte(config.AppConfig.JwtSecret + password)
