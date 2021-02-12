@@ -11,7 +11,7 @@ import (
 // params:
 // 	id	地址id	int
 func Delete(c *gin.Context) {
-	api := app.ApiFunction{C: c}
+	api := &app.ApiFunction{C: c}
 
 	query := addressModel.DeleteRequestParamsStruct{}
 	if err := c.ShouldBindJSON(&query); err != nil {
