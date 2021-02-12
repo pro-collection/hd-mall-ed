@@ -35,7 +35,7 @@ func Login(c *gin.Context) {
 			code = e.FailAuthTokenCreate
 		} else {
 			// 设置 cookie
-			api.SetCookie("admin-token", token, int(claims.ExpiresAt))
+			api.SetCookie(adminTokenKey, token, int(claims.ExpiresAt))
 			code = e.Success
 		}
 	}
