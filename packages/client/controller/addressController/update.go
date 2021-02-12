@@ -5,8 +5,14 @@ import (
 	"hd-mall-ed/packages/client/models/addressModel"
 	"hd-mall-ed/packages/client/pkg/app"
 	"hd-mall-ed/packages/client/pkg/e"
+	"log"
 )
 
+// @title     更新地址
+// @description
+// @auth      晴小篆  331393627@qq.com
+// @param     addressModel.UpdateRequestParamsStruct
+// @return
 func Update(c *gin.Context) {
 	api := app.ApiFunction{C: c}
 	var err error
@@ -17,6 +23,7 @@ func Update(c *gin.Context) {
 	err = c.ShouldBindJSON(&updateParams)
 
 	if err != nil {
+		log.Println(err)
 		api.ResFail(e.FailBindJson)
 		return
 	}
@@ -34,6 +41,11 @@ func Update(c *gin.Context) {
 	api.ResponseNoData()
 }
 
+// @title     更细默认地址
+// @description
+// @auth      晴小篆  331393627@qq.com
+// @param     addressModel.UpdateDefaultRequestParamsStruct
+// @return
 func UpdateDefault(c *gin.Context) {
 	api := app.ApiFunction{C: c}
 	var err error

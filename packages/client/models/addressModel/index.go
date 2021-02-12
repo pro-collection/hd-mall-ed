@@ -3,6 +3,7 @@ package addressModel
 import (
 	"errors"
 	"github.com/thoas/go-funk"
+	"github.com/ulule/deepcopier"
 	"hd-mall-ed/packages/client/database"
 	"hd-mall-ed/packages/client/database/tableModel"
 	"hd-mall-ed/packages/client/models/userModel"
@@ -45,8 +46,11 @@ func (address *Address) CreateAddress() error {
 
 // 更新用户地址
 func (*Address) UpdateAddress(updateParams *UpdateRequestParamsStruct) error {
-	// 首先要找到当前id才能更新
-	return database.DataBase.Model(&Address{}).Updates(&updateParams).Error
+	addressParams := &Address{}
+	_ = deepcopier.Copy(updateParams).To(addressParams)
+
+	// updates 这个方法， 一定要和 model 是一个结构体才行
+	return database.DataBase.Model(&Address{}).Where("id = ?", addressParams.ID).Updates(addressParams).Error
 }
 
 // 删除用户地址
