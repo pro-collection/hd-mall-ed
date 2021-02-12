@@ -1,8 +1,8 @@
 package app
 
 import (
-	"hd-mall-ed/packages/client/models/userModel"
-	"hd-mall-ed/packages/client/pkg/utils/jwtUtil"
+	"hd-mall-ed/packages/common/models/userModel"
+	"hd-mall-ed/packages/common/pkg/utils/jwtUtil"
 )
 
 // 通过 token 获取用户信息

@@ -4,9 +4,9 @@ import (
 	"errors"
 	"github.com/thoas/go-funk"
 	"github.com/ulule/deepcopier"
-	"hd-mall-ed/packages/client/models/userModel"
 	"hd-mall-ed/packages/common/database"
 	"hd-mall-ed/packages/common/database/tableModel"
+	"hd-mall-ed/packages/common/models/userModel"
 )
 
 type Address tableModel.Address

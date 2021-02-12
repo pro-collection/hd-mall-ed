@@ -1,6 +1,6 @@
 package addressController
 
-import "hd-mall-ed/packages/client/pkg/e"
+import "hd-mall-ed/packages/common/pkg/e"
 
 // @title     	更新地址
 // @description

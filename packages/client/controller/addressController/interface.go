@@ -1,8 +1,8 @@
 package addressController
 
 import (
-	"hd-mall-ed/packages/client/models/addressModel"
-	"hd-mall-ed/packages/client/pkg/app"
+	"hd-mall-ed/packages/common/models/addressModel"
+	"hd-mall-ed/packages/common/pkg/app"
 )
 
 type handleUpdateAddressHelperOptions struct {

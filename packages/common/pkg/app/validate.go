@@ -2,7 +2,7 @@ package app
 
 import (
 	"github.com/asaskevich/govalidator"
-	"hd-mall-ed/packages/client/pkg/e"
+	"hd-mall-ed/packages/common/pkg/e"
 	"strings"
 )
 

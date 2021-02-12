@@ -3,9 +3,9 @@ package jwtMiddleware
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/thoas/go-funk"
-	"hd-mall-ed/packages/client/pkg/app"
-	"hd-mall-ed/packages/client/pkg/e"
-	"hd-mall-ed/packages/client/pkg/utils/jwtUtil"
+	"hd-mall-ed/packages/common/pkg/app"
+	"hd-mall-ed/packages/common/pkg/e"
+	"hd-mall-ed/packages/common/pkg/utils/jwtUtil"
 	"time"
 )
 

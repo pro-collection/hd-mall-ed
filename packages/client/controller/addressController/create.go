@@ -3,9 +3,9 @@ package addressController
 import (
 	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
-	"hd-mall-ed/packages/client/models/addressModel"
-	"hd-mall-ed/packages/client/pkg/app"
-	"hd-mall-ed/packages/client/pkg/e"
+	"hd-mall-ed/packages/common/models/addressModel"
+	"hd-mall-ed/packages/common/pkg/app"
+	"hd-mall-ed/packages/common/pkg/e"
 	"strings"
 )
 

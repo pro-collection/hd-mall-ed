@@ -3,7 +3,7 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"hd-mall-ed/packages/client/controller/addressController"
-	"hd-mall-ed/packages/client/middleware/jwtMiddleware"
+	"hd-mall-ed/packages/common/middleware/jwtMiddleware"
 )
 
 func addressRouter(router *gin.RouterGroup) {
