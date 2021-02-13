@@ -9,7 +9,7 @@ import (
 func (api *ApiFunction) GetUser() (adminUserModel.AdminUser, error) {
 	var user adminUserModel.AdminUser
 
-	token, err := api.C.Cookie("token")
+	token, err := api.C.Cookie("admin-token")
 	if err != nil {
 		return user, err
 	}

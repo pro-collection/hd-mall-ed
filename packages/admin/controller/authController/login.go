@@ -20,7 +20,6 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	data := make(map[string]interface{})
 	code := e.FailAuthToken
 	id, err := adminAuthModel.CheckAuth(params.Name, params.Password)
 	if err != nil {
@@ -41,7 +40,7 @@ func Login(c *gin.Context) {
 	}
 
 	if code == e.Success {
-		api.Response(data)
+		api.ResponseNoData()
 		return
 	}
 

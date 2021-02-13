@@ -14,6 +14,7 @@ func userRouter(router *gin.RouterGroup) {
 
 	user.Use(jwtMiddleware.AdminJwt())
 	{
-
+		// 获取用户信息
+		user.GET("/info", userController.GetUserInfo)
 	}
 }

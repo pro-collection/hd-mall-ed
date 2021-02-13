@@ -39,7 +39,7 @@ func AdminParseToken(token string) (*Claims, error) {
 
 	// 通过密码动态授权
 	tokenClaims, err := jwt.ParseWithClaims(token, &Claims{}, func(token *jwt.Token) (interface{}, error) {
-		return []byte(config.AppConfig.JwtSecret + user.Password), nil
+		return []byte(config.AppConfig.AdminJwtSecret + user.Password), nil
 	})
 	if tokenClaims != nil {
 		if claims, ok := tokenClaims.Claims.(*Claims); ok && tokenClaims.Valid {

@@ -57,7 +57,7 @@ func AdminJwt() gin.HandlerFunc {
 		code = e.Success
 
 		// 需要从 cookie 中获取
-		token, err := c.Cookie("token")
+		token, err := c.Cookie("admin-token")
 		if err != nil {
 			code = e.FailAuthCheckToken
 		}
