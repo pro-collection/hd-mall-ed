@@ -28,6 +28,9 @@ const (
 	AddressDeleteFail     = 30005
 	AddressSetDefaultFail = 30006
 	AddressNotExist       = 30007
+
+	// 商品种类
+	CategoryNameRepetition = 40001
 )
 
 var MsgFlags = map[int]string{
@@ -55,4 +58,6 @@ var MsgFlags = map[int]string{
 	AddressDeleteFail:     "删除地址失败",
 	AddressSetDefaultFail: "设置默认地址失败",
 	AddressNotExist:       "当前地址不存在",
+
+	CategoryNameRepetition: "商品种类名称重复",
 }

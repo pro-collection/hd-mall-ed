@@ -12,13 +12,22 @@ func (category *Category) Create() error {
 	return database.DataBase.Create(category).Error
 }
 
-// 查询
+// 获取所有的列表数据
 func (category *Category) Get() ([]*tableModel.CategoryBase, error) {
 	var categoryList []*tableModel.CategoryBase
 	if err := database.DataBase.Model(&Category{}).Find(categoryList).Error; err != nil {
 		return categoryList, err
 	}
 	return categoryList, nil
+}
+
+// 通过类别名称查找是否重复
+func (category *Category) FindByName() (*Category, error) {
+	findCategory := &Category{}
+	if err := database.DataBase.Model(&Category{}).Where("name = ?", category.Name).First(findCategory).Error; err != nil {
+		return nil, err
+	}
+	return findCategory, nil
 }
 
 // 更新
