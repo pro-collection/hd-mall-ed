@@ -15,7 +15,7 @@ func (category *Category) Create() error {
 // 获取所有的列表数据
 func (category *Category) Get() ([]*tableModel.CategoryBase, error) {
 	var categoryList []*tableModel.CategoryBase
-	if err := database.DataBase.Model(&Category{}).Find(categoryList).Error; err != nil {
+	if err := database.DataBase.Model(&Category{}).Find(&categoryList).Error; err != nil {
 		return categoryList, err
 	}
 	return categoryList, nil
@@ -25,7 +25,7 @@ func (category *Category) Get() ([]*tableModel.CategoryBase, error) {
 func (category *Category) FindByName() (*Category, error) {
 	findCategory := &Category{}
 	if err := database.DataBase.Model(&Category{}).Where("name = ?", category.Name).First(findCategory).Error; err != nil {
-		return nil, err
+		return findCategory, err
 	}
 	return findCategory, nil
 }

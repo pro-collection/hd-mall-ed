@@ -22,9 +22,7 @@ func Create(c *gin.Context) {
 	}
 
 	// 验证是否重复
-	_, err = model.FindByName()
-	if err != nil {
-		api.ResFail(e.CategoryNameRepetition)
+	if handleCheckUserNameIsExistHelper(model, api) {
 		return
 	}
 

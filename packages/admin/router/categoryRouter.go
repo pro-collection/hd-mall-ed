@@ -13,6 +13,6 @@ func categoryRouter(router *gin.RouterGroup) {
 		category.POST("/create", categoryController.Create)
 
 		// 获取所有列表
-		category.GET("/list")
+		category.GET("/list", categoryController.GetList)
 	}
 }
