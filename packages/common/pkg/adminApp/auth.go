@@ -22,3 +22,12 @@ func (api *ApiFunction) GetUser() (adminUserModel.AdminUser, error) {
 
 	return user, nil
 }
+
+// 单独只获取用户的id
+func (api *ApiFunction) GetUserId() int {
+	user, err := api.GetUser()
+	if err != nil {
+		return -1
+	}
+	return int(user.ID)
+}

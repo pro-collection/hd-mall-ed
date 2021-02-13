@@ -16,5 +16,8 @@ func userRouter(router *gin.RouterGroup) {
 	{
 		// 获取用户信息
 		user.GET("/info", userController.GetUserInfo)
+
+		// 更新用户信息
+		user.POST("/update", userController.Update)
 	}
 }

@@ -30,9 +30,9 @@ func (*AdminUser) FindUserById(id uint) (AdminUser, error) {
 }
 
 // 通过用户名查找
-func (*AdminUser) FindUserByName(name string) (AdminUser, error) {
+func (user *AdminUser) FindUserByName(name string) (AdminUser, error) {
 	resultUser := AdminUser{}
-	err := database.DataBase.Where("name = ?", name).First(&resultUser).Error
+	err := database.DataBase.Where("name = ?", name).Not("id = ?", user.ID).First(&resultUser).Error
 	if err != nil {
 		return resultUser, err
 	}

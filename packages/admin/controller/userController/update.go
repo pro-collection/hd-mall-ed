@@ -25,6 +25,13 @@ func Update(c *gin.Context) {
 	}
 
 	err = deepcopier.Copy(params).To(model)
+	model.ID = uint(api.GetUserId())
+
+	// 判定是否存在当前用户信息
+	if handleCheckUserNameIsExistHelper(model, api) {
+		return
+	}
+
 	err = model.Update()
 	if err != nil {
 		api.ResFailMessage(e.Fail, err.Error())
