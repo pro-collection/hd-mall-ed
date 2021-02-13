@@ -24,7 +24,7 @@ func main() {
 		Address: addressStruct{"12", ""},
 	}
 
-	result, err := govalidator.ValidateStruct(user)
+	result, err := govalidator.ValidateStruct(&user)
 	fmt.Println("result: ", result)
 	if err != nil {
 		fmt.Println(strings.Split(err.Error(), ";")[0])

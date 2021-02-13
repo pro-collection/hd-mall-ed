@@ -8,6 +8,7 @@ func SetUpRouter() *gin.Engine {
 	index := router.Group("/api/admin")
 	{
 		authRouter(index)
+		userRouter(index)
 		categoryRouter(index)
 	}
 

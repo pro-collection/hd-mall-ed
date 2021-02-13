@@ -15,5 +15,5 @@ func init() {
 
 func main() {
 	appRouter := router.SetUpRouter()
-	_ = appRouter.Run()
+	_ = appRouter.Run(":8081")
 }

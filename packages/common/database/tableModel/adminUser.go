@@ -10,14 +10,14 @@ package tableModel
 // @return
 type AdminUserBase struct {
 	ID     uint   `json:"id" gorm:"primarykey"`
-	Name   string `json:"name" gorm:"not null"`
+	Name   string `json:"name" gorm:"not null" valid:"required~缺少用户名"`
 	Avatar string `json:"avatar" gorm:"comment:头像"`
 	Email  string `json:"email" gorm:"comment:邮箱"`
-	Role   string `json:"role" gorm:"comment:角色"`
+	Role   string `json:"role" gorm:"comment:角色" valid:"required~缺少角色"`
 }
 
 type AdminUser struct {
 	AdminUserBase
-	Password string `json:"password" gorm:"not null"`
+	Password string `json:"password" gorm:"not null" valid:"required~缺少密码"`
 	ModelStruct
 }
