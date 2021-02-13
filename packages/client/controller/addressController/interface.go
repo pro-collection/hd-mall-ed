@@ -1,7 +1,7 @@
 package addressController
 
 import (
-	"hd-mall-ed/packages/admin/models/addressModel"
+	"hd-mall-ed/packages/client/models/addressModel"
 	"hd-mall-ed/packages/common/pkg/app"
 )
 

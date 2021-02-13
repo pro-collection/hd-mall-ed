@@ -6,7 +6,7 @@ import (
 	"github.com/ulule/deepcopier"
 	"hd-mall-ed/packages/common/database"
 	"hd-mall-ed/packages/common/database/tableModel"
-	"hd-mall-ed/packages/admin/models/userModel"
+	"hd-mall-ed/packages/client/models/userModel"
 )
 
 type Address tableModel.Address

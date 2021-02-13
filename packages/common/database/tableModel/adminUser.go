@@ -17,7 +17,7 @@ type AdminUserBase struct {
 }
 
 type AdminUser struct {
-	ModelStruct
-	Password string `json:"password" gorm:"not null"`
 	AdminUserBase
+	Password string `json:"password" gorm:"not null"`
+	ModelStruct
 }
