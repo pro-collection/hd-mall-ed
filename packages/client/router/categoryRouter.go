@@ -1,6 +1,10 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"hd-mall-ed/packages/client/controller/categoryController"
+	"hd-mall-ed/packages/common/middleware/jwtMiddleware"
+)
 
 // @title     	商品分类路由
 // @description 不需要分类
@@ -9,7 +13,8 @@ import "github.com/gin-gonic/gin"
 // @return
 func categoryRouter(router *gin.RouterGroup) {
 	category := router.Group("/category")
+	category.Use(jwtMiddleware.Jwt())
 	{
-		category.POST("/create")
+		category.GET("/list", categoryController.Get)
 	}
 }
