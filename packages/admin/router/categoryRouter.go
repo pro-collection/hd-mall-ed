@@ -18,5 +18,8 @@ func categoryRouter(router *gin.RouterGroup) {
 
 		// 更新分类
 		category.POST("/update", categoryController.Update)
+
+		// 删除
+		category.POST("/delete", categoryController.Delete)
 	}
 }

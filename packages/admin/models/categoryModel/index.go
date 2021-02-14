@@ -21,6 +21,16 @@ func (category *Category) Get() ([]*tableModel.CategoryBase, error) {
 	return categoryList, nil
 }
 
+// 查询 primary 分类的个数
+func (category *Category) GetPrimaryCount() (int, error) {
+	var count int64
+	err := database.DataBase.Model(&Category{}).Where("parent_id != ?", 0).Count(&count).Error
+	if err != nil {
+		return int(count), err
+	}
+	return int(count), nil
+}
+
 // 通过类别名称查找是否重复
 func (category *Category) FindByName() (*Category, error) {
 	findCategory := &Category{}
@@ -32,7 +42,7 @@ func (category *Category) FindByName() (*Category, error) {
 
 // 更新
 func (category *Category) Update() error {
-	return database.DataBase.Model(&Category{}).Updates(&category).Error
+	return database.DataBase.Model(&Category{}).Where("id = ?", category.ID).Updates(&category).Error
 }
 
 // 删除

@@ -37,6 +37,11 @@ func Update(c *gin.Context) {
 		return
 	}
 
+	// 如果是创建主分类的场景，需要检验限制
+	if !funk.IsEmpty(model.ParentId) && handleListCheckHelper(model, api) {
+		return
+	}
+
 	// 更新
 	err = model.Update()
 

@@ -31,6 +31,7 @@ const (
 
 	// 商品种类
 	CategoryNameRepetition = 40001
+	CategoryPrimaryLimit5  = 40002
 )
 
 var MsgFlags = map[int]string{
@@ -60,4 +61,5 @@ var MsgFlags = map[int]string{
 	AddressNotExist:       "当前地址不存在",
 
 	CategoryNameRepetition: "商品种类名称重复",
+	CategoryPrimaryLimit5:  "主要商品分类不能超过5个",
 }
