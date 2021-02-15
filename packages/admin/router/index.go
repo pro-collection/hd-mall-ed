@@ -10,6 +10,7 @@ func SetUpRouter() *gin.Engine {
 		authRouter(index)
 		userRouter(index)
 		categoryRouter(index)
+		uploadRouter(index)
 	}
 
 	return router

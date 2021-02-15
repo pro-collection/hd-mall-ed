@@ -19,6 +19,10 @@ type App struct {
 	LogSaveName     string
 	LogFileExt      string
 	TimeFormat      string
+	AccessToken     string
+	Owner           string
+	Repository      string
+	Path            string
 }
 
 var AppConfig = &App{}
