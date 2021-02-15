@@ -20,6 +20,9 @@ func SetUpRouter() *gin.Engine {
 
 		// category 商品分类
 		categoryRouter(index)
+
+		// product
+		productRouter(index)
 	}
 
 	return router

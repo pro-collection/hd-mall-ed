@@ -7,10 +7,16 @@ func SetUpRouter() *gin.Engine {
 
 	index := router.Group("/api/admin")
 	{
+		// auth
 		authRouter(index)
+		// user
 		userRouter(index)
+		// category
 		categoryRouter(index)
+		// upload
 		uploadRouter(index)
+		// product
+		productRouter(index)
 	}
 
 	return router
