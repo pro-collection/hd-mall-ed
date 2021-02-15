@@ -42,7 +42,7 @@ func (category *Category) FindByName() (*Category, error) {
 
 // 更新
 func (category *Category) Update() error {
-	return database.DataBase.Model(&Category{}).Where("id = ?", category.ID).Updates(&category).Error
+	return database.DataBase.Model(&Category{}).Where("id = ?", category.ID).Updates(*category).Error
 }
 
 // 删除

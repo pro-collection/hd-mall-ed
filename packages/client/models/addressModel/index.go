@@ -50,7 +50,7 @@ func (*Address) UpdateAddress(updateParams *UpdateRequestParamsStruct) error {
 	_ = deepcopier.Copy(updateParams).To(addressParams)
 
 	// updates 这个方法， 一定要和 model 是一个结构体才行
-	return database.DataBase.Model(&Address{}).Where("id = ?", addressParams.ID).Updates(addressParams).Error
+	return database.DataBase.Model(&Address{}).Where("id = ?", addressParams.ID).Updates(*addressParams).Error
 }
 
 // 删除用户地址

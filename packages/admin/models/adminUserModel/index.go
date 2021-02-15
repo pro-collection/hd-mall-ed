@@ -41,6 +41,6 @@ func (user *AdminUser) FindUserByName(name string) (AdminUser, error) {
 
 // 更新方法
 func (user *AdminUser) Update() error {
-	err := database.DataBase.Model(&AdminUser{}).Where("id = ?", user.ID).Updates(&user).Error
+	err := database.DataBase.Model(&AdminUser{}).Where("id = ?", user.ID).Updates(*user).Error
 	return err
 }

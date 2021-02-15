@@ -4,7 +4,6 @@ import (
 	"hd-mall-ed/packages/common/database"
 	"hd-mall-ed/packages/common/database/tableModel"
 	"hd-mall-ed/packages/common/models/modelHelper"
-	"strconv"
 )
 
 type Product tableModel.Product
@@ -15,13 +14,13 @@ func (product *Product) Create() error {
 }
 
 // 条件查询商品信息
-func (product *Product) GetListByQuery(query map[string]string) ([]*Product, error) {
+func (product *Product) GetListByQuery(query map[string]interface{}) ([]*Product, error) {
 	var productList []*Product
 
-	page, err := strconv.Atoi(query["page"])
-	pageSize, err := strconv.Atoi(query["pageSize"])
+	page := query["page"].(int)
+	pageSize := query["pageSize"].(int)
 
-	err = database.DataBase.
+	err := database.DataBase.
 		Model(&Product{}).
 		Scopes(modelHelper.Paginate(page, pageSize)).
 		Where(query).
@@ -32,4 +31,10 @@ func (product *Product) GetListByQuery(query map[string]string) ([]*Product, err
 	return productList, nil
 }
 
+func (product *Product) Update() error {
+	return database.DataBase.Where("id = ?", product.ID).Updates(*product).Error
+}
 
+func (product *Product) Delete() error {
+	return database.DataBase.Delete(product).Error
+}
