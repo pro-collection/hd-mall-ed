@@ -6,7 +6,6 @@ import (
 	"hd-mall-ed/packages/common/middleware/jwtMiddleware"
 )
 
-
 func productRouter(router *gin.RouterGroup) {
 	product := router.Group("/product")
 	product.Use(jwtMiddleware.AdminJwt())
@@ -15,6 +14,12 @@ func productRouter(router *gin.RouterGroup) {
 		product.POST("/list", productController.GetListByQuery)
 
 		// 创建一个商品
-		product.POST("/create")
+		product.POST("/create", productController.Create)
+
+		// 更新一个商品
+		product.POST("/update", productController.Update)
+
+		// 删除
+		product.POST("/delete", productController.Delete)
 	}
 }

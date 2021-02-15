@@ -1,24 +1,29 @@
 package productController
 
 import (
+	"errors"
 	"github.com/gin-gonic/gin"
+	"github.com/thoas/go-funk"
 	"hd-mall-ed/packages/admin/models/productModel"
 	"hd-mall-ed/packages/common/pkg/adminApp"
 	"hd-mall-ed/packages/common/pkg/e"
 )
 
-func Create(c *gin.Context) {
+func Delete(c *gin.Context) {
 	api := adminApp.ApiInit(c)
 	model := &productModel.Product{}
 	var err error
 
-	// 参数绑定
-	err = c.ShouldBindJSON(model)
-	if api.ValidateHasError(model) {
-		return
+	params := &deleteParamsStruct{}
+
+	err = c.ShouldBindJSON(params)
+
+	if funk.IsEmpty(params.Id) {
+		err = errors.New(e.GetMsg(e.NotFoundId))
 	}
 
-	err = model.Create()
+	model.ID = uint(params.Id)
+	err = model.Delete()
 	if err != nil {
 		api.ResFailMessage(e.Fail, err.Error())
 		return
