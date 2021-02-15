@@ -12,6 +12,9 @@ func autoMigrateTable() {
 		&tableModel.Address{},
 		&tableModel.Category{},
 		&tableModel.AdminUser{},
+		&tableModel.Product{},
+		&tableModel.ProductCategory{},
+		&tableModel.Static{},
 	)
 
 	if err != nil {
