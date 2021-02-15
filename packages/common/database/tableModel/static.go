@@ -13,9 +13,9 @@ package tableModel
 type StaticBase struct {
 	ID        uint   `json:"id" gorm:"primarykey"`
 	ProductId uint   `json:"product_id" gorm:"index;comment:关联的productId"`
-	Type      int    `json:"type" gorm:"not null;comment:图片类型"`
-	FileName  string `json:"file_type" gorm:"comment:文件名字"`
-	Url       string `json:"url" gorm:"not null;comment:图片链接;type:longtext"`
+	Type      int    `json:"type" gorm:"not null;comment:图片类型" valid:"required"`
+	FileName  string `json:"file_type" gorm:"comment:文件名字" valid:"required"`
+	Url       string `json:"url" gorm:"not null;comment:图片链接;type:longtext" valid:"required"`
 	Link      string `json:"link" gorm:"comment:图片的点击跳转链接"`
 }
 
