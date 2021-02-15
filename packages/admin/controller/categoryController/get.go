@@ -3,6 +3,7 @@ package categoryController
 import (
 	"github.com/gin-gonic/gin"
 	"hd-mall-ed/packages/admin/models/categoryModel"
+	"hd-mall-ed/packages/common/controller/categoryHelper"
 	"hd-mall-ed/packages/common/database/tableModel"
 	"hd-mall-ed/packages/common/pkg/adminApp"
 	"hd-mall-ed/packages/common/pkg/e"
@@ -20,5 +21,5 @@ func GetList(c *gin.Context) {
 		return
 	}
 
-	api.Response(list)
+	api.Response(categoryHelper.HandleListHelper(list))
 }

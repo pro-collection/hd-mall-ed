@@ -1,4 +1,4 @@
-package categoryController
+package categoryHelper
 
 import (
 	"github.com/thoas/go-funk"
@@ -6,13 +6,13 @@ import (
 	"hd-mall-ed/packages/common/database/tableModel"
 )
 
-func handleListHelper(list []*tableModel.CategoryBase) []*listItemResultStruct {
-	var resultList []*listItemResultStruct
+func HandleListHelper(list []*tableModel.CategoryBase) []*ListItemResultStruct {
+	var resultList []*ListItemResultStruct
 	var subordinate []*tableModel.CategoryBase
 
 	for _, base := range list {
 		if base.ParentId == 0 {
-			item := &listItemResultStruct{}
+			item := &ListItemResultStruct{}
 			_ = deepcopier.Copy(base).To(item)
 			resultList = append(resultList, item)
 		} else {
@@ -32,7 +32,7 @@ func handleListHelper(list []*tableModel.CategoryBase) []*listItemResultStruct {
 
 	// 实现方法2
 	for _, base := range subordinate {
-		result := funk.Find(resultList, func(result *listItemResultStruct) bool {
+		result := funk.Find(resultList, func(result *ListItemResultStruct) bool {
 			if result.ID == base.ParentId {
 				return true
 			}
@@ -40,7 +40,7 @@ func handleListHelper(list []*tableModel.CategoryBase) []*listItemResultStruct {
 		})
 
 		if !funk.IsEmpty(result) {
-			result.(*listItemResultStruct).Children = append(result.(*listItemResultStruct).Children, base)
+			result.(*ListItemResultStruct).Children = append(result.(*ListItemResultStruct).Children, base)
 		}
 	}
 

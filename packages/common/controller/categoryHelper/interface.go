@@ -1,8 +1,8 @@
-package categoryController
+package categoryHelper
 
 import "hd-mall-ed/packages/common/database/tableModel"
 
-type listItemResultStruct struct {
+type ListItemResultStruct struct {
 	ID       uint                       `json:"id" gorm:"primarykey"`
 	Name     string                     `json:"name" gorm:"not null;comment:'商品分类'" valid:"required~缺少商品类别名称"`
 	Type     int                        `json:"type" gorm:"comment:'商品分类的类型'"`
