@@ -11,7 +11,7 @@ require (
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/go-redis/redis/v7 v7.4.0
 	github.com/leodido/go-urn v1.2.1 // indirect
-	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a // indirect
+	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
 	github.com/thoas/go-funk v0.7.0
 	github.com/tidwall/gjson v1.6.8
 	github.com/ugorji/go v1.2.3 // indirect
