@@ -23,6 +23,7 @@ func Update(c *gin.Context) {
 		err = errors.New(e.GetMsg(e.NotFoundId))
 	}
 
+	// todo 更新之前校验是是否有重复商品
 	// 更新接口
 	err = model.Update()
 

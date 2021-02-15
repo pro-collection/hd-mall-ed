@@ -18,6 +18,7 @@ func Create(c *gin.Context) {
 		return
 	}
 
+	// todo 创建之前校验是是否有重复商品售卖类型
 	err = model.Create()
 	if err != nil {
 		api.ResFailMessage(e.Fail, err.Error())

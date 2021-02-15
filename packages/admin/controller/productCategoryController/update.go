@@ -17,6 +17,7 @@ func Update(c *gin.Context) {
 		return
 	}
 
+	// todo 更新之前校验是是否有重复商品售卖类型
 	err = model.Update()
 	if err != nil {
 		api.ResFailMessage(e.Fail, err.Error())
