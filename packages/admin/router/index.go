@@ -17,6 +17,8 @@ func SetUpRouter() *gin.Engine {
 		uploadRouter(index)
 		// product
 		productRouter(index)
+		// productCategoryRouter
+		productCategoryRouter(index)
 	}
 
 	return router

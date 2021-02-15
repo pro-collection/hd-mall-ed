@@ -7,26 +7,24 @@ import (
 	"hd-mall-ed/packages/admin/models/productCategoryModel"
 	"hd-mall-ed/packages/common/pkg/adminApp"
 	"hd-mall-ed/packages/common/pkg/e"
-	"strconv"
 )
 
-func GetList(c *gin.Context) {
+func Delete(c *gin.Context) {
 	api := adminApp.ApiInit(c)
 	model := &productCategoryModel.ProductCategory{}
-	idString := c.DefaultQuery("id", "")
-	id, err := strconv.Atoi(idString)
+	var err error
+	err = c.ShouldBindJSON(model)
 
-	if funk.IsEmpty(id) {
+	if funk.IsEmpty(model.ID) {
 		err = errors.New(e.GetMsg(e.NotFoundId))
 	}
 
-	// 查询逻辑
-	list, err := model.GetList()
+	err = model.Delete()
 
 	if err != nil {
 		api.ResFailMessage(e.Fail, err.Error())
 		return
 	}
 
-	api.Response(list)
+	api.ResponseNoData()
 }

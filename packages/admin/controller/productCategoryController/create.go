@@ -1,32 +1,28 @@
 package productCategoryController
 
 import (
-	"errors"
 	"github.com/gin-gonic/gin"
-	"github.com/thoas/go-funk"
 	"hd-mall-ed/packages/admin/models/productCategoryModel"
 	"hd-mall-ed/packages/common/pkg/adminApp"
 	"hd-mall-ed/packages/common/pkg/e"
-	"strconv"
 )
 
-func GetList(c *gin.Context) {
+func Create(c *gin.Context) {
 	api := adminApp.ApiInit(c)
 	model := &productCategoryModel.ProductCategory{}
-	idString := c.DefaultQuery("id", "")
-	id, err := strconv.Atoi(idString)
+	var err error
 
-	if funk.IsEmpty(id) {
-		err = errors.New(e.GetMsg(e.NotFoundId))
+	// 绑定参数
+	err = c.ShouldBindJSON(model)
+	if api.ValidateHasError(model) {
+		return
 	}
 
-	// 查询逻辑
-	list, err := model.GetList()
-
+	err = model.Create()
 	if err != nil {
 		api.ResFailMessage(e.Fail, err.Error())
 		return
 	}
 
-	api.Response(list)
+	api.ResponseNoData()
 }
