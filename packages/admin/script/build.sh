@@ -1,6 +1,8 @@
 #!/bin/bash
 
+echo "build start ..."
 CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ./admin ./../main.go
+echo "build complete ..."
 
 scp ./admin yanle-tx:/root/app/hd_mell/admin
 scp ./show-log-admin.sh yanle-tx:/root/app/hd_mell/show-log-admin.sh
