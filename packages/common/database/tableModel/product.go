@@ -17,7 +17,7 @@ type ProductBase struct {
 	OriginalCost float32 `json:"original_cost" gorm:"comment:原价" valid:"required"`
 	Price        float32 `json:"price" gorm:"not null;comment:实际价格" valid:"required"`
 	Inventory    int     `json:"inventory" gorm:"comment:库存" valid:"required"`
-	PrimaryImage string  `json:"primary_image" gorm:"comment:主图" valid:"required"`
+	PrimaryImage string  `json:"primary_image" gorm:"comment:主图;type:longtext" valid:"required"`
 	Sales        int     `json:"sales" gorm:"comment:销量"`
 	Params       string  `json:"params" gorm:"type:longtext;comment:商品参数，json 格式"`
 	Tag          string  `json:"tag" gorm:"comment:标签tag"`
