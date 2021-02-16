@@ -8,8 +8,8 @@ import (
 // 售卖的商品分类
 type ProductCategory tableModel.ProductCategory
 
-func (category *ProductCategory) GetList() (*[]ProductCategory, error) {
-	list := &[]ProductCategory{}
+func (category *ProductCategory) GetList() (*[]tableModel.ProductCategoryBase, error) {
+	list := &[]tableModel.ProductCategoryBase{}
 
 	err := database.DataBase.Model(&ProductCategory{}).Where("product_id = ?", category.ProductId).Find(&list).Error
 	if err != nil {
@@ -23,7 +23,7 @@ func (category *ProductCategory) Create() error {
 }
 
 func (category *ProductCategory) Update() error {
-	return database.DataBase.Model(&ProductCategory{}).Updates(*category).Error
+	return database.DataBase.Model(&ProductCategory{}).Where("id = ?", category.ID).Updates(*category).Error
 }
 
 func (category *ProductCategory) Delete() error {
