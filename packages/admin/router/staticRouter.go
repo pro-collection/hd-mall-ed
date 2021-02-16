@@ -10,7 +10,7 @@ func staticRouter(router *gin.RouterGroup) {
 	//static.Use(jwtMiddleware.AdminJwt())
 	{
 		static.GET("/list", staticController.GetListByQuery)
-		static.GET("/create", staticController.CreateStatics)
+		static.POST("/create", staticController.CreateStatics)
 		static.POST("/update", staticController.Update)
 		static.POST("/delete", staticController.Deletes)
 	}

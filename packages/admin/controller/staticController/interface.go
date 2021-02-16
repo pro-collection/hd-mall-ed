@@ -14,3 +14,7 @@ type GetListByQueryParams struct {
 	Url       string `json:"url"`
 	Link      string `json:"link"`
 }
+
+type deleteQueryParams struct {
+	List []int `json:"list"`
+}

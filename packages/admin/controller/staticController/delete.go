@@ -7,7 +7,6 @@ import (
 	"hd-mall-ed/packages/admin/models/staticModel"
 	"hd-mall-ed/packages/common/pkg/adminApp"
 	"hd-mall-ed/packages/common/pkg/e"
-	"hd-mall-ed/packages/common/pkg/utils"
 )
 
 // @title           删除单个文件
@@ -49,13 +48,15 @@ func Deletes(c *gin.Context) {
 	api := adminApp.ApiInit(c)
 	model := &staticModel.Static{}
 
-	err := c.ShouldBindJSON(model)
-	if api.ValidateHasError(model) {
+	query := &deleteQueryParams{}
+	err := c.ShouldBindJSON(query)
+
+	if len(query.List) <= 0 {
+		api.ResFail(e.NotFoundId)
 		return
 	}
 
-	query := utils.Struct2Map(model)
-	err = model.Deletes(query)
+	err = model.Deletes(query.List)
 	if err != nil {
 		api.ResFailMessage(e.Fail, err.Error())
 		return

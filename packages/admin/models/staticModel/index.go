@@ -44,6 +44,6 @@ func (static *Static) Delete() error {
 }
 
 // 按照条件批量删除
-func (*Static) Deletes(query map[string]interface{}) error {
-	return database.DataBase.Where(query).Delete(&Static{}).Error
+func (*Static) Deletes(query []int) error {
+	return database.DataBase.Where("id in ?", query).Delete(&Static{}).Error
 }
