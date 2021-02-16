@@ -33,6 +33,10 @@ func SetUpRouter() *gin.Engine {
 
 		// product
 		productRouter(index)
+
+		productCategoryRouter(index)
+
+		staticRouter(index)
 	}
 
 	return router
