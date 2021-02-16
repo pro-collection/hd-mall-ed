@@ -1,4 +1,4 @@
-package static
+package staticModel
 
 import (
 	"hd-mall-ed/packages/common/database"
@@ -11,11 +11,17 @@ func (static *Static) Create() error {
 	return database.DataBase.Create(static).Error
 }
 
+// 插入多个
+func (static *Static) CreateStatics(statics *[]Static) error {
+	return database.DataBase.Create(statics).Error
+}
+
 func (static *Static) Update() error {
 	return database.DataBase.Where("id = ?", static.ID).Updates(*static).Error
 }
 
-func (static *Static) GetListByQuery(query map[string]string) (*[]Static, error) {
+// 按照条件获取
+func (static *Static) GetListByQuery(query map[string]interface{}) (*[]Static, error) {
 	list := &[]Static{}
 	err := database.DataBase.Where(query).Find(list).Error
 	if err != nil {
