@@ -2,6 +2,7 @@ package authController
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/thoas/go-funk"
 	"hd-mall-ed/packages/common/config/cache"
 	"hd-mall-ed/packages/common/pkg/app"
 	"hd-mall-ed/packages/common/pkg/e"
@@ -14,7 +15,7 @@ func Logout(c *gin.Context) {
 	api := app.ApiFunction{C: c}
 	// 获取 token
 	token, err := c.Cookie("token")
-	if err != nil {
+	if err != nil && funk.IsEmpty(token) {
 		api.ResFail(e.FailLoginStatus)
 		return
 	}
