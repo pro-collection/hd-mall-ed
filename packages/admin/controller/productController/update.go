@@ -21,6 +21,8 @@ func Update(c *gin.Context) {
 	}
 	if funk.IsEmpty(model.ID) {
 		err = errors.New(e.GetMsg(e.NotFoundId))
+		api.ResFail(e.NotFoundId)
+		return
 	}
 
 	// todo 更新之前校验是是否有重复商品

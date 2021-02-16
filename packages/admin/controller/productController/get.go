@@ -25,5 +25,9 @@ func GetListByQuery(c *gin.Context) {
 		return
 	}
 
-	api.Response(list)
+	result := make(map[string]interface{})
+	result["list"] = list
+	// todo 缺少分页的总量
+
+	api.Response(result)
 }

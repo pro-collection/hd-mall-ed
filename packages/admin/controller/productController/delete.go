@@ -20,6 +20,8 @@ func Delete(c *gin.Context) {
 
 	if funk.IsEmpty(params.Id) {
 		err = errors.New(e.GetMsg(e.NotFoundId))
+		api.ResFail(e.NotFoundId)
+		return
 	}
 
 	model.ID = uint(params.Id)
