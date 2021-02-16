@@ -1,6 +1,7 @@
 package productModel
 
 import (
+	"github.com/ulule/deepcopier"
 	"hd-mall-ed/packages/common/database"
 	"hd-mall-ed/packages/common/database/tableModel"
 	"hd-mall-ed/packages/common/models/modelHelper"
@@ -14,16 +15,16 @@ func (product *Product) Create() error {
 }
 
 // 条件查询商品信息
-func (product *Product) GetListByQuery(query map[string]interface{}) ([]*Product, error) {
+func (product *Product) GetListByQuery(query *GetListQueryStruct) ([]*Product, error) {
 	var productList []*Product
 
-	page := query["page"].(int)
-	pageSize := query["pageSize"].(int)
+	queryBase := &GetListQueryBaseStruct{}
+	_ = deepcopier.Copy(query).To(queryBase)
 
 	err := database.DataBase.
 		Model(&Product{}).
-		Scopes(modelHelper.Paginate(page, pageSize)).
-		Where(query).
+		Scopes(modelHelper.Paginate(query.Page, query.PageSize)).
+		Where(queryBase).
 		Find(&productList).Error
 	if err != nil {
 		return productList, err

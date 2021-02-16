@@ -5,7 +5,6 @@ import (
 	"hd-mall-ed/packages/admin/models/productModel"
 	"hd-mall-ed/packages/common/pkg/adminApp"
 	"hd-mall-ed/packages/common/pkg/e"
-	"hd-mall-ed/packages/common/pkg/utils"
 )
 
 func GetListByQuery(c *gin.Context) {
@@ -13,11 +12,14 @@ func GetListByQuery(c *gin.Context) {
 	model := &productModel.Product{}
 	var err error
 	var list []*productModel.Product
-	query := &getListQueryStruct{}
+	query := &productModel.GetListQueryStruct{}
 	err = c.ShouldBindJSON(query)
-	queryMap := utils.Struct2Map(query)
 
-	list, err = model.GetListByQuery(queryMap)
+	if api.ValidateHasError(query) {
+		return
+	}
+
+	list, err = model.GetListByQuery(query)
 	if err != nil {
 		api.ResFailMessage(e.Fail, err.Error())
 		return
