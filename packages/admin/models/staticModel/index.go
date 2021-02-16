@@ -42,3 +42,8 @@ func (static *Static) GetAllList() (*[]Static, error) {
 func (static *Static) Delete() error {
 	return database.DataBase.Delete(static).Error
 }
+
+// 按照条件批量删除
+func (*Static) Deletes(query map[string]string) error {
+	return database.DataBase.Where(query).Delete(&Static{}).Error
+}

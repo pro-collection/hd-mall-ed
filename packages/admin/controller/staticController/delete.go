@@ -1,0 +1,5 @@
+package staticController
+
+func Delete() {
+
+}
