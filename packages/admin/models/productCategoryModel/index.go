@@ -6,12 +6,12 @@ import (
 )
 
 // 售卖的商品分类
-type ProductCategory tableModel.ProductSellCategory
+type ProductCategory tableModel.ProductCategory
 
 func (category *ProductCategory) GetList() (*[]ProductCategory, error) {
 	list := &[]ProductCategory{}
 
-	err := database.DataBase.Model(&ProductCategory{}).Find(&list).Error
+	err := database.DataBase.Model(&ProductCategory{}).Where("product_id = ?", category.ProductId).Find(&list).Error
 	if err != nil {
 		return list, err
 	}

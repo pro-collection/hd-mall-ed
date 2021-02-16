@@ -13,7 +13,7 @@ func autoMigrateTable() {
 		&tableModel.Category{},
 		&tableModel.AdminUser{},
 		&tableModel.Product{},
-		&tableModel.ProductSellCategory{},
+		&tableModel.ProductCategory{},
 		&tableModel.Static{},
 	)
 
