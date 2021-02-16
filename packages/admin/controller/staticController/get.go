@@ -2,6 +2,7 @@ package staticController
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/thoas/go-funk"
 	"hd-mall-ed/packages/admin/models/staticModel"
 	"hd-mall-ed/packages/common/pkg/adminApp"
 	"hd-mall-ed/packages/common/pkg/e"
@@ -36,6 +37,7 @@ func GetListByQuery(c *gin.Context) {
 	api := adminApp.ApiInit(c)
 	model := &staticModel.Static{}
 	query := make(map[string]interface{})
+	list := &[]staticModel.Static{}
 
 	err := c.ShouldBindQuery(model)
 	if api.ValidateHasError(model) {
@@ -43,8 +45,12 @@ func GetListByQuery(c *gin.Context) {
 	}
 
 	utils.Struct2Map(query)
+	if funk.IsEmpty(query) {
+		list, err = model.GetAllList()
+	} else {
+		list, err = model.GetListByQuery(query)
+	}
 
-	list, err := model.GetListByQuery(query)
 	if err != nil {
 		api.ResFailMessage(e.Fail, err.Error())
 		return

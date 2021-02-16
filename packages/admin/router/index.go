@@ -1,14 +1,26 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"hd-mall-ed/packages/admin/controller/userController"
+	"hd-mall-ed/packages/common/middleware/jwtMiddleware"
+)
 
 func SetUpRouter() *gin.Engine {
 	router := gin.Default()
 
-	index := router.Group("/api/admin")
+	// auth - 不需要授权的场景
+	auth := router.Group("/api/admin")
 	{
-		// auth
-		authRouter(index)
+		authRouter(auth)
+		// 注册用户
+		auth.POST("/user/register", userController.Register)
+	}
+
+	// 需要授权的场景
+	index := router.Group("/api/admin")
+	index.Use(jwtMiddleware.AdminJwt())
+	{
 		// user
 		userRouter(index)
 		// category
@@ -19,6 +31,9 @@ func SetUpRouter() *gin.Engine {
 		productRouter(index)
 		// productCategoryRouter
 		productCategoryRouter(index)
+
+		//
+		staticRouter(index)
 	}
 
 	return router
