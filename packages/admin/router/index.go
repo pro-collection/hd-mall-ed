@@ -32,7 +32,7 @@ func SetUpRouter() *gin.Engine {
 		// productCategoryRouter
 		productCategoryRouter(index)
 
-		//
+		// 资源
 		staticRouter(index)
 	}
 
