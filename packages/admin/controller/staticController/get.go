@@ -3,10 +3,10 @@ package staticController
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/thoas/go-funk"
+	"github.com/ulule/deepcopier"
 	"hd-mall-ed/packages/admin/models/staticModel"
 	"hd-mall-ed/packages/common/pkg/adminApp"
 	"hd-mall-ed/packages/common/pkg/e"
-	"hd-mall-ed/packages/common/pkg/utils"
 )
 
 // @title           获取所有静态文件
@@ -36,19 +36,15 @@ func GetAllList(c *gin.Context) {
 func GetListByQuery(c *gin.Context) {
 	api := adminApp.ApiInit(c)
 	model := &staticModel.Static{}
-	query := make(map[string]interface{})
+	queryParams := handleQueryParamsHelper(c)
 	list := &[]staticModel.Static{}
+	var err error
 
-	err := c.ShouldBindQuery(model)
-	if api.ValidateHasError(model) {
-		return
-	}
-
-	utils.Struct2Map(query)
-	if funk.IsEmpty(query) {
+	_ = deepcopier.Copy(queryParams).To(model)
+	if funk.IsEmpty(queryParams) {
 		list, err = model.GetAllList()
 	} else {
-		list, err = model.GetListByQuery(query)
+		list, err = model.GetListByQuery(queryParams)
 	}
 
 	if err != nil {

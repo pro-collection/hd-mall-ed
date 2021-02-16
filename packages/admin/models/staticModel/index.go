@@ -21,7 +21,7 @@ func (static *Static) Update() error {
 }
 
 // 按照条件获取
-func (static *Static) GetListByQuery(query map[string]interface{}) (*[]Static, error) {
+func (*Static) GetListByQuery(query interface{}) (*[]Static, error) {
 	list := &[]Static{}
 	err := database.DataBase.Where(query).Find(list).Error
 	if err != nil {
