@@ -17,6 +17,7 @@ func Upload(c *gin.Context) {
 	api := adminApp.ApiInit(c)
 
 	fileHeader, _ := c.FormFile("file")
+	fileRealName := fileHeader.Filename
 	file, _ := fileHeader.Open()
 
 	dist := make([]byte, 50000000) //开辟存储空间
@@ -57,5 +58,6 @@ func Upload(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{
 		"download_url": gjson.Get(res.String(), "content.download_url").String(),
+		"file_name": fileRealName,
 	})
 }
