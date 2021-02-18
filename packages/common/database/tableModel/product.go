@@ -7,6 +7,12 @@ package tableModel
 // 	Status
 //		1 - 上架
 //		2 - 下架
+//  Tag
+//		1 - 热销产品
+//		2 - 店家推荐
+//		3 - 新品上架
+//		4 - 优惠活动
+//		5 - 有礼相送
 // @return
 type ProductBase struct {
 	ID           uint    `json:"id" gorm:"primarykey"`
