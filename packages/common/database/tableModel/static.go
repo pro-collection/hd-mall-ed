@@ -5,7 +5,7 @@ package tableModel
 // @auth            晴小篆  331393627@qq.com
 // @param
 //	type int
-//		1 - 商品主图
+//		1 - 商品图
 //		2 - 商品详情图
 // 		3 - banner 主图
 //		4 - banner 附图
