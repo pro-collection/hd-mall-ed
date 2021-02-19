@@ -20,6 +20,15 @@ func handleCheckUserNameIsExistHelper(category *categoryModel.Category, api *adm
 	return false
 }
 
+func handleUpdateCheckUserNameIsExistHelper(category *categoryModel.Category, api *adminApp.ApiFunction) bool {
+	resultUser, _ := category.FindByNameExistCurrentName()
+	if resultUser.ID > 0 {
+		api.ResFail(e.CategoryNameRepetition)
+		return true
+	}
+	return false
+}
+
 // @title           校验限制
 // @description
 // @auth            晴小篆  331393627@qq.com

@@ -40,6 +40,15 @@ func (category *Category) FindByName() (*Category, error) {
 	return findCategory, nil
 }
 
+// 通过类别重复吵吵是否重复排除自己
+func (category *Category) FindByNameExistCurrentName() (*Category, error) {
+	findCategory := &Category{}
+	if err := database.DataBase.Model(&Category{}).Where("name = ?", category.Name).Not("id = ?", category.ID).Error; err != nil {
+		return findCategory, err
+	}
+	return findCategory, nil
+}
+
 // 更新
 func (category *Category) Update() error {
 	return database.DataBase.Model(&Category{}).Where("id = ?", category.ID).Updates(*category).Error

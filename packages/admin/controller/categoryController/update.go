@@ -32,8 +32,7 @@ func Update(c *gin.Context) {
 	err = deepcopier.Copy(params).To(model)
 
 	// 校验是否是存在
-	if handleCheckUserNameIsExistHelper(model, api) {
-		api.ResFail(e.CategoryNameRepetition)
+	if handleUpdateCheckUserNameIsExistHelper(model, api) {
 		return
 	}
 
