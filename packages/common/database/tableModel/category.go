@@ -5,8 +5,8 @@ package tableModel
 // @auth            晴小篆  331393627@qq.com
 // @param
 // 	type:
-//		0 - 没有类型设置
-//		1 - primary
+//		1 - 没有类型设置
+//		2 - primary
 // @return
 type CategoryBase struct {
 	ID       uint   `json:"id" gorm:"primarykey"`
