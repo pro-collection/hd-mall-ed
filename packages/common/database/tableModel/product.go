@@ -13,6 +13,7 @@ package tableModel
 //		3 - 新品上架
 //		4 - 优惠活动
 //		5 - 有礼相送
+// 		6 - 限时折扣
 // @return
 type ProductBase struct {
 	ID           uint    `json:"id" gorm:"primarykey"`
