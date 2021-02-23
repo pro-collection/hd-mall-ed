@@ -21,6 +21,9 @@ func SetUpRouter() *gin.Engine {
 		productRouter(auth)
 
 		productCategoryRouter(auth)
+
+		// category 商品分类
+		categoryRouter(auth)
 	}
 
 	// 需要鉴权的接口
@@ -32,9 +35,6 @@ func SetUpRouter() *gin.Engine {
 
 		// address 相关接口
 		addressRouter(index)
-
-		// category 商品分类
-		categoryRouter(index)
 
 		staticRouter(index)
 	}
