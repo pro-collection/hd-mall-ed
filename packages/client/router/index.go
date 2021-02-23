@@ -16,6 +16,11 @@ func SetUpRouter() *gin.Engine {
 		authRouter(auth)
 
 		auth.POST("/user/create", userController.CreateUser)
+
+		// product
+		productRouter(auth)
+
+		productCategoryRouter(auth)
 	}
 
 	// 需要鉴权的接口
@@ -30,11 +35,6 @@ func SetUpRouter() *gin.Engine {
 
 		// category 商品分类
 		categoryRouter(index)
-
-		// product
-		productRouter(index)
-
-		productCategoryRouter(index)
 
 		staticRouter(index)
 	}
