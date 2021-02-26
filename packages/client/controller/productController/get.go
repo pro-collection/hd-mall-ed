@@ -12,3 +12,10 @@ func GetPrimaryCategoryProductList(c *gin.Context) {
 	list := model.GetPrimaryCategoryAndProductList()
 	api.Response(list)
 }
+
+func GetDiscountProduct(c *gin.Context) {
+	model := productModel.Product{}
+	api := app.ApiFunction{C: c}
+	list := model.GetLimitDiscount()
+	api.Response(list)
+}

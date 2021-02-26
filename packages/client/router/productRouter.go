@@ -15,5 +15,8 @@ func productRouter(router *gin.RouterGroup) {
 
 		// 获取默认的 category primary list
 		product.GET("/primary", clientProductController.GetPrimaryCategoryProductList)
+
+		// 获取discount
+		product.GET("/discount", clientProductController.GetDiscountProduct)
 	}
 }

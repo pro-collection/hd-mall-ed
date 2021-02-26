@@ -30,7 +30,7 @@ func (*Product) GetPrimaryCategoryAndProductList() *[]CategoryProductStruct {
 }
 
 // 获取限时折扣的商品
-func (*Product) getLimitDiscount() *[]tableModel.ProductBase {
+func (*Product) GetLimitDiscount() *[]tableModel.ProductBase {
 	list := &[]tableModel.ProductBase{}
 	database.DataBase.Where("tag = ", 6).Where("status = ", 1).Limit(12).Find(list)
 	return list
