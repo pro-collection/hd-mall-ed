@@ -17,7 +17,7 @@ func (*Product) GetPrimaryCategoryAndProductList() *[]CategoryProductStruct {
 		productList := &[]tableModel.ProductBase{}
 
 		// todo 这个地方可以使用 协程
-		database.DataBase.Model(&Product{}).Where("category_id = ?", category.ID).Limit(6).Find(productList)
+		database.DataBase.Model(&Product{}).Where("category_id = ?", category.ID).Limit(8).Find(productList)
 
 		categoryProductStruct := CategoryProductStruct{}
 		_ = deepcopier.Copy(&category).To(&categoryProductStruct)
