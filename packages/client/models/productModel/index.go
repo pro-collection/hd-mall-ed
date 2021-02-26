@@ -9,7 +9,6 @@ import (
 type Product tableModel.Product
 
 func (*Product) GetPrimaryCategoryAndProductList() *[]CategoryProductStruct {
-
 	primaryCategoryList := &[]tableModel.Category{}
 	database.DataBase.Model(&tableModel.Category{}).Where("type = ?", 2).Find(primaryCategoryList)
 	var list []CategoryProductStruct
@@ -28,4 +27,11 @@ func (*Product) GetPrimaryCategoryAndProductList() *[]CategoryProductStruct {
 	}
 
 	return &list
+}
+
+// 获取限时折扣的商品
+func (*Product) getLimitDiscount() *[]tableModel.ProductBase {
+	list := &[]tableModel.ProductBase{}
+	database.DataBase.Where("tag = ", 6).Where("status = ", 1).Limit(12).Find(list)
+	return list
 }
