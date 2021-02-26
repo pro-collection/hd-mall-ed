@@ -1,6 +1,7 @@
 package productModel
 
 import (
+	"github.com/ulule/deepcopier"
 	"hd-mall-ed/packages/common/database"
 	"hd-mall-ed/packages/common/database/tableModel"
 )
@@ -20,7 +21,7 @@ func (*Product) GetPrimaryCategoryAndProductList() *[]CategoryProductStruct {
 		database.DataBase.Model(&Product{}).Where("category_id = ?", category.ID).Limit(6).Find(productList)
 
 		categoryProductStruct := CategoryProductStruct{}
-		categoryProductStruct.CategoryId = int(category.ID)
+		_ = deepcopier.Copy(&category).To(&categoryProductStruct)
 		categoryProductStruct.ProductList = productList
 
 		list = append(list, categoryProductStruct)
