@@ -16,6 +16,7 @@ type CategoryBase struct {
 	Avatar   string `json:"avatar" gorm:"comment:缩略图"`
 	BannerImage string `json:"banner_image" gorm:"content:banner图片;type:longtext"`
 	BannerProductId uint `json:"banner_product_id" gorm:"content:banner对应的商品id, 可以实现跳转"`
+	BannerLink string `json:"banner_link" gorm:"content:banner对应商品的跳转链接"`
 }
 
 type Category struct {
