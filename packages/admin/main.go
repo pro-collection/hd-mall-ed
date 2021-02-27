@@ -9,7 +9,7 @@ import (
 
 func init() {
 	config.SetUp()
-	database.SetUp()
+	database.SetUp(&database.DBConfig{})
 	cache.SetUp()
 }
 

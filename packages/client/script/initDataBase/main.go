@@ -12,7 +12,7 @@ func init() {
 }
 
 func main() {
-	database.SetUp()
+	database.SetUp(&database.DBConfig{InitDB: true})
 	sqlDb, err := database.DataBase.DB()
 
 	err = sqlDb.Close()

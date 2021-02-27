@@ -15,7 +15,7 @@ import (
 
 var DataBase *gorm.DB
 
-func SetUp() {
+func SetUp(myConfig *DBConfig) {
 	var err error
 	databaseName := config.DatabaseConfig.Name
 	user := config.DatabaseConfig.User
@@ -67,7 +67,9 @@ func SetUp() {
 	}
 
 	// 初始化表
-	autoMigrateTable()
+	if myConfig.InitDB {
+		autoMigrateTable()
+	}
 
 	// SetMaxIdleConns 设置空闲连接池中连接的最大数量
 	sqlDB.SetMaxIdleConns(10)
