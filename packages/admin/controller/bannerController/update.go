@@ -8,15 +8,14 @@ import (
 	"hd-mall-ed/packages/common/pkg/e"
 )
 
-// 单个创建
-func Create(c *gin.Context) {
+func Update(c *gin.Context) {
 	api := adminApp.ApiInit(c)
 	model := &staticModel.Static{}
-	err := c.ShouldBindJSON(model)
 
-	// 验证参数
-	if funk.IsEmpty(model.Link) {
-		api.ResFail(e.InvalidParams)
+	// 参数绑定
+	err := c.ShouldBindJSON(model)
+	if funk.IsEmpty(model.ID) {
+		api.ResFail(e.NotFoundId)
 		return
 	}
 	if api.ValidateHasError(model) {
@@ -24,12 +23,11 @@ func Create(c *gin.Context) {
 		return
 	}
 
-	// 创建入库
-	err = model.Create()
+	// 更新
+	err = model.Update()
 	if err != nil {
 		api.ResFailMessage(e.Fail, err.Error())
 		return
 	}
-
 	api.ResponseNoData()
 }
