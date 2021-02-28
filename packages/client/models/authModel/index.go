@@ -2,9 +2,9 @@ package authModel
 
 import (
 	"encoding/json"
+	"hd-mall-ed/packages/client/models/userModel"
 	"hd-mall-ed/packages/common/config/cache"
 	"hd-mall-ed/packages/common/database"
-	"hd-mall-ed/packages/client/models/userModel"
 	"strconv"
 )
 
@@ -42,6 +42,16 @@ func GetAuthById(id int64) userModel.User {
 	var user userModel.User
 	// 获取鉴权
 	userJsonString, err := cache.Manager.Get(strconv.Itoa(int(id)))
+
+	// 没有获取到缓存， 或者缓存失效了
+	if userJsonString == "" {
+		if err := database.DataBase.Model(&userModel.User{}).Where("id = ?", id).First(&user).Error; err != nil {
+			userBytes, _ := json.Marshal(user)
+			_ = cache.Manager.Set(strconv.Itoa(int(user.ID)), string(userBytes), nil)
+			return user
+		}
+	}
+
 	if err != nil {
 		return user
 	}
