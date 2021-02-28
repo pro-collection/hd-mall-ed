@@ -35,6 +35,16 @@ func GetAuthById(id int64) adminUserModel.AdminUser {
 	var user adminUserModel.AdminUser
 	// 获取鉴权
 	userJsonString, err := cache.Manager.Get(cache.AminCacheKey(int(id)))
+
+	// 没有获取到缓存， 或者缓存失效了
+	if userJsonString == "" {
+		if err := database.DataBase.Model(&adminUserModel.AdminUser{}).Where("id = ?", id).First(&user).Error; err != nil {
+			userBytes, _ := json.Marshal(user)
+			_ = cache.Manager.Set(cache.AminCacheKey(int(user.ID)), string(userBytes), nil)
+			return user
+		}
+	}
+
 	if err != nil {
 		return user
 	}
