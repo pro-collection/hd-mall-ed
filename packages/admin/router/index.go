@@ -34,6 +34,9 @@ func SetUpRouter() *gin.Engine {
 
 		// 资源
 		staticRouter(index)
+
+		// banner router
+		bannerRouter(index)
 	}
 
 	return router
