@@ -15,7 +15,5 @@ func categoryRouter(router *gin.RouterGroup) {
 	//category.Use(jwtMiddleware.Jwt())
 	{
 		category.GET("/list", categoryController.Get)
-
-
 	}
 }

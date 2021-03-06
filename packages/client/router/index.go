@@ -15,15 +15,20 @@ func SetUpRouter() *gin.Engine {
 		// 鉴权登录的相关接口
 		authRouter(auth)
 
+		// client 用户注册
 		auth.POST("/user/create", userController.CreateUser)
 
 		// product
 		productRouter(auth)
 
+		// 商品属性种类
 		productCategoryRouter(auth)
 
 		// category 商品分类
 		categoryRouter(auth)
+
+		// banner 信息
+		bannerRouter(auth)
 	}
 
 	// 需要鉴权的接口
