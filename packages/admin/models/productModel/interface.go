@@ -1,7 +1,7 @@
 package productModel
 
 type GetListQueryBaseStruct struct {
-	CategoryId int `json:"category_id" valid:"required"`
+	CategoryId int `json:"category_id"`
 }
 
 type GetListQueryStruct struct {
