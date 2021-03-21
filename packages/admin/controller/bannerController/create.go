@@ -15,11 +15,7 @@ func Create(c *gin.Context) {
 	err := c.ShouldBindJSON(model)
 
 	// 验证参数
-	if funk.IsEmpty(model.Link) {
-		api.ResFail(e.InvalidParams)
-		return
-	}
-	if api.ValidateHasError(model) {
+	if funk.IsEmpty(model.Link) || funk.IsEmpty(model.Url) {
 		api.ResFail(e.InvalidParams)
 		return
 	}
