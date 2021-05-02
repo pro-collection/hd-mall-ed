@@ -27,17 +27,17 @@ func GetDetail(c *gin.Context) {
 	_ = deepcopier.Copy(model).To(detail)
 
 	// 查询静态资源
-	staticList := &[]staticModel.Static{}
+	//staticList := &[]staticModel.Static{}
 	staticQueryMap := make(map[string]interface{})
 	staticQueryMap["product_id"] = id
-	staticList, _ = static.GetListByQuery(staticQueryMap)
+	staticList, _ := static.GetListByQuery(staticQueryMap)
 
-	for index, static := range *staticList {
+	for _, static := range *staticList {
 		if static.Type == 1 {
-			detail.ProductImageList[index] = static
+			detail.ProductImageList = append(detail.ProductImageList, static)
 		}
 		if static.Type == 2 {
-			detail.ProductDetailImageList[index] = static
+			detail.ProductDetailImageList = append(detail.ProductDetailImageList, static)
 		}
 	}
 

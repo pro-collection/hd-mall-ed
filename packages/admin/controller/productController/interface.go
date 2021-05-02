@@ -3,6 +3,7 @@ package productController
 import (
 	"hd-mall-ed/packages/admin/models/productModel"
 	"hd-mall-ed/packages/admin/models/staticModel"
+	"hd-mall-ed/packages/common/database/tableModel"
 )
 
 type createParamsStruct struct {
@@ -16,7 +17,7 @@ type deleteParamsStruct struct {
 }
 
 type detailResponseStruct struct {
-	productModel.Product
+	tableModel.ProductBase
 	ProductImageList []staticModel.Static `json:"product_image_list"`
 	ProductDetailImageList []staticModel.Static `json:"product_detail_image_list"`
 }
