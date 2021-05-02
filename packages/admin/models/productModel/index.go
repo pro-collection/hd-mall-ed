@@ -27,32 +27,43 @@ func (product *Product) GetListByQuery(query *GetListQueryStruct) ([]*Product, e
 
 	queryMap := make(map[string]interface{})
 
+	// 商品归属的品类
 	if queryBase.CategoryId != 0 {
 		queryMap["category_id"] = queryBase.CategoryId
 	}
 
+	// 最大价格范围
 	if queryBase.Max != 0 {
 		paginationBase.Where("price < ?", queryBase.Max)
 	}
 
+	// 最小价格范围
 	if queryBase.Min != 0 {
 		paginationBase.Where("price > ?", queryBase.Min)
 	}
 
+	// 搜索问题
 	if queryBase.Query != "" {
 		paginationBase.Where("name like ?", "%"+queryBase.Query+"%")
 		paginationBase.Where("title like ?", "%"+queryBase.Query+"%")
 	}
 
-	//if queryBase.SortType != "" {
-	//	switch queryBase.SortType {
-	//	case "1":
-	//		{
-	//
-	//			break
-	//		}
-	//	}
-	//}
+	// 排序问题
+	if queryBase.SortType != "" {
+		switch queryBase.SortType {
+		case "2":
+			{
+				// 根据销量降序
+				paginationBase.Order("sales desc")
+				break
+			}
+		case "3":
+			{
+				// 根据创建时间降序
+				paginationBase.Order("created_at desc")
+			}
+		}
+	}
 
 	err := paginationBase.
 		Where(queryMap).
