@@ -61,6 +61,30 @@ func (product *Product) GetListByQuery(query *GetListQueryStruct) ([]*Product, e
 			{
 				// 根据创建时间降序
 				paginationBase.Order("created_at desc")
+				break
+			}
+		}
+	}
+
+	if queryBase.Type != "" {
+		switch queryBase.Type {
+		case "1":
+			{
+				// 有货的场景
+				paginationBase.Where("inventory > 0")
+				break
+			}
+		case "2":
+			{
+				// 热销产品
+				paginationBase.Where("tag = 1")
+				break
+			}
+		case "3":
+			{
+				// 限时折扣
+				paginationBase.Where("tag = 6")
+				break
 			}
 		}
 	}
