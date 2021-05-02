@@ -21,10 +21,30 @@ func (product *Product) GetListByQuery(query *GetListQueryStruct) ([]*Product, e
 	queryBase := &GetListQueryBaseStruct{}
 	_ = deepcopier.Copy(query).To(queryBase)
 
-	err := database.DataBase.
+	paginationBase := database.DataBase.
 		Model(&Product{}).
-		Scopes(modelHelper.Paginate(query.Page, query.PageSize)).
-		Where(queryBase).
+		Scopes(modelHelper.Paginate(query.Page, query.PageSize))
+
+	queryMap := make(map[string]interface{})
+
+	if queryBase.CategoryId != 0 {
+		queryMap["category_id"] = queryBase.CategoryId
+	}
+
+	if queryBase.Max != 0 {
+		paginationBase.Where("price < ?", queryBase.Max)
+	}
+
+	if queryBase.Min != 0 {
+		paginationBase.Where("price > ?", queryBase.Min)
+	}
+
+	if queryBase.Query != "" {
+		paginationBase.Where("title like ?", "%"+queryBase.Query+"%")
+	}
+
+	err := paginationBase.
+		Where(queryMap).
 		Find(&productList).Error
 	if err != nil {
 		return productList, err
