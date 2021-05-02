@@ -41,8 +41,18 @@ func (product *Product) GetListByQuery(query *GetListQueryStruct) ([]*Product, e
 
 	if queryBase.Query != "" {
 		paginationBase.Where("name like ?", "%"+queryBase.Query+"%")
-		paginationBase.Where("desc like ?", "%"+queryBase.Query+"%")
+		paginationBase.Where("title like ?", "%"+queryBase.Query+"%")
 	}
+
+	//if queryBase.SortType != "" {
+	//	switch queryBase.SortType {
+	//	case "1":
+	//		{
+	//
+	//			break
+	//		}
+	//	}
+	//}
 
 	err := paginationBase.
 		Where(queryMap).
