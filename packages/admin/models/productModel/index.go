@@ -40,7 +40,8 @@ func (product *Product) GetListByQuery(query *GetListQueryStruct) ([]*Product, e
 	}
 
 	if queryBase.Query != "" {
-		paginationBase.Where("title like ?", "%"+queryBase.Query+"%")
+		paginationBase.Where("name like ?", "%"+queryBase.Query+"%")
+		paginationBase.Where("desc like ?", "%"+queryBase.Query+"%")
 	}
 
 	err := paginationBase.
