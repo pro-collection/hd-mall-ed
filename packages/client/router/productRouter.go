@@ -18,5 +18,7 @@ func productRouter(router *gin.RouterGroup) {
 
 		// 获取 discount 折扣商品列表
 		product.GET("/discount", clientProductController.GetDiscountProduct)
+
+		product.GET("/get_detail", productController.GetDetail)
 	}
 }
