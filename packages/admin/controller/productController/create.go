@@ -44,7 +44,5 @@ func Create(c *gin.Context) {
 	go staticModelInstance.CreateStatics(&params.ProductImageList)
 	go staticModelInstance.CreateStatics(&params.ProductDetailImageList)
 
-
-
 	api.ResponseNoData()
 }

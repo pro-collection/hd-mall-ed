@@ -14,3 +14,9 @@ type createParamsStruct struct {
 type deleteParamsStruct struct {
 	Id int `json:"id" valid:"require"`
 }
+
+type detailResponseStruct struct {
+	productModel.Product
+	ProductImageList []staticModel.Static `json:"product_image_list"`
+	ProductDetailImageList []staticModel.Static `json:"product_detail_image_list"`
+}

@@ -105,3 +105,7 @@ func (product *Product) Update() error {
 func (product *Product) Delete() error {
 	return database.DataBase.Delete(product).Error
 }
+
+func (product *Product) GetById(id int) error {
+	return database.DataBase.Where("id = ?", id).First(product).Error
+}

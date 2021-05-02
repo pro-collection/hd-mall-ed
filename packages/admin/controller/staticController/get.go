@@ -31,11 +31,13 @@ func GetAllList(c *gin.Context) {
 // @title           通过入参条件获取静态文件列表
 // @description     staticModel.Static
 // @auth            晴小篆  331393627@qq.com
-// @param
+// @param			GetListByQueryParams
 // @return
 func GetListByQuery(c *gin.Context) {
 	api := adminApp.ApiInit(c)
 	model := &staticModel.Static{}
+
+	// 获取查询参数
 	queryParams := handleQueryParamsHelper(c)
 	list := &[]staticModel.Static{}
 	var err error

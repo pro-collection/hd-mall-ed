@@ -20,5 +20,8 @@ func productRouter(router *gin.RouterGroup) {
 
 		// 删除
 		product.POST("/delete", productController.Delete)
+
+		// 通过 id 获取一个 详情数据
+		product.GET("/get_detail", productController.GetDetail)
 	}
 }
