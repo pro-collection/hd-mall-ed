@@ -5,6 +5,7 @@ import (
 	"hd-mall-ed/packages/client/models/shoppingCartModel"
 	"hd-mall-ed/packages/common/pkg/app"
 	"hd-mall-ed/packages/common/pkg/e"
+	"time"
 )
 
 /*
@@ -26,4 +27,31 @@ func Update(c *gin.Context) {
 	}
 
 	api.ResponseNoData()
+}
+
+func SettleAccounts(c *gin.Context) {
+	api := app.ApiFunction{C: c}
+	model := &shoppingCartModel.ShoppingCart{}
+
+	var list []shoppingCartModel.ShoppingCart
+
+	_ = c.ShouldBind(&list)
+
+	tempOrderId := uint(time.Now().UnixNano() / 1e6)
+
+	var queryMap []uint
+	updateMap := make(map[string]interface{})
+
+	for _, cart := range list {
+		//updateMap["type"] = cart.Type
+		updateMap["temp_order_id"] = tempOrderId
+		queryMap = append(queryMap, cart.ProductId)
+	}
+
+	err := model.Updates(&queryMap, &updateMap)
+	if err != nil {
+		api.ResFail(e.Fail)
+		return
+	}
+	api.Response(tempOrderId)
 }

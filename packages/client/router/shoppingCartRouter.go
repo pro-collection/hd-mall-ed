@@ -25,5 +25,8 @@ func ShoppingCartRouter(router *gin.RouterGroup)  {
 
 		// 更新
 		shoppingCart.POST("/update", shoppingCartController.Update)
+
+		// 购物车结账
+		shoppingCart.POST("/settle_accounts", shoppingCartController.SettleAccounts)
 	}
 }

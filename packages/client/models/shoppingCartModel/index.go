@@ -60,3 +60,11 @@ func (shoppingCart *ShoppingCart) Update() error {
 		Where("user_id", shoppingCart.UserId).
 		Update("count", shoppingCart.Count).Error
 }
+
+// 批量更新
+func (shoppingCart *ShoppingCart) Updates(productIdList *[]uint, updateMap *map[string]interface{}) error {
+	return database.DataBase.Model(&ShoppingCart{}).
+		Where("user_id", shoppingCart.UserId).
+		Where("product_id in ?", *productIdList).
+		Updates(*updateMap).Error
+}
