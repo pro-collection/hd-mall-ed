@@ -8,8 +8,8 @@ import (
 type ShoppingCart tableModel.ShoppingCart
 
 // 插入多个
-func (*ShoppingCart) CreateShoppingCartInfo(infoList *[]ShoppingCart) error {
-	return database.DataBase.Model(&ShoppingCart{}).Create(infoList).Error
+func (shoppingCart *ShoppingCart) CreateShoppingCartInfo() error {
+	return database.DataBase.Create(shoppingCart).Error
 }
 
 // 通过 id 拿到信息

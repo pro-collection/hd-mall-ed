@@ -5,6 +5,7 @@ import (
 	"hd-mall-ed/packages/admin/models/shoppingCartModel"
 	"hd-mall-ed/packages/common/pkg/adminApp"
 	"hd-mall-ed/packages/common/pkg/e"
+	"time"
 )
 
 /*
@@ -15,33 +16,25 @@ func Create(c *gin.Context) {
 
 	model := &shoppingCartModel.ShoppingCart{}
 
-	var listParams []shoppingCartModel.ShoppingCart
+	_ = c.ShouldBind(&model)
 
-	_ = c.ShouldBind(&listParams)
+	model.UserId = uint(api.GetUserId())
 
-	for i, _ := range listParams {
-		listParams[i].UserId = uint(api.GetUserId())
+	if model.Type == 2 {
+		model.TempOrderId = uint(time.Now().UnixNano() / 1e6)
 	}
 
-	err := model.CreateShoppingCartInfo(&listParams)
+	err := model.CreateShoppingCartInfo()
 	if err != nil {
 		api.ResFail(e.Fail)
 		return
 	}
 
-	isTempOrder := false
-	var tempOrderId uint
-	for index, cart := range listParams {
-		if index == 0 {
-			if cart.Type == 2 {
-				isTempOrder = true
-				tempOrderId = cart.ID
-			}
-		}
-	}
-	if isTempOrder {
-		api.Response(tempOrderId)
+
+	if model.Type == 2 {
+		api.Response(model.TempOrderId)
 		return
 	}
+
 	api.ResponseNoData()
 }
