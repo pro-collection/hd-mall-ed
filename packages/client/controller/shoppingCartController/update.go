@@ -33,6 +33,8 @@ func SettleAccounts(c *gin.Context) {
 	api := app.ApiFunction{C: c}
 	model := &shoppingCartModel.ShoppingCart{}
 
+	model.UserId = uint(api.GetUserId())
+
 	var list []shoppingCartModel.ShoppingCart
 
 	_ = c.ShouldBind(&list)
@@ -45,7 +47,7 @@ func SettleAccounts(c *gin.Context) {
 	for _, cart := range list {
 		//updateMap["type"] = cart.Type
 		updateMap["temp_order_id"] = tempOrderId
-		queryMap = append(queryMap, cart.ProductId)
+		queryMap = append(queryMap, cart.ID)
 	}
 
 	err := model.Updates(&queryMap, &updateMap)
