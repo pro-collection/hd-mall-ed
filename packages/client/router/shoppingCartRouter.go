@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"hd-mall-ed/packages/admin/controller/shoppingCartController"
+	"hd-mall-ed/packages/client/controller/shoppingCartController"
 )
 
 func ShoppingCartRouter(router *gin.RouterGroup)  {

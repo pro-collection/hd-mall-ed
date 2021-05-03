@@ -42,7 +42,7 @@ func (shoppingCart *ShoppingCart) GetList() (*[]ShoppingCart, error) {
 
 // 删除
 func (shoppingCart *ShoppingCart) Delete(idList *[]uint) error {
-	return database.DataBase.Delete(&ShoppingCart{}, idList).Error
+	return database.DataBase.Unscoped().Delete(&ShoppingCart{}, idList).Error
 }
 
 // 更新

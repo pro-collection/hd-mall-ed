@@ -55,7 +55,7 @@ func (*Address) UpdateAddress(updateParams *UpdateRequestParamsStruct) error {
 
 // 删除用户地址
 func (address *Address) DeleteAddress() error {
-	return database.DataBase.Delete(address).Error
+	return database.DataBase.Unscoped().Delete(address).Error
 }
 
 // 更新默认地址

@@ -2,15 +2,15 @@ package shoppingCartController
 
 import (
 	"github.com/gin-gonic/gin"
-	"hd-mall-ed/packages/admin/models/shoppingCartModel"
-	"hd-mall-ed/packages/common/pkg/adminApp"
+	"hd-mall-ed/packages/client/models/shoppingCartModel"
+	"hd-mall-ed/packages/common/pkg/app"
 	"hd-mall-ed/packages/common/pkg/e"
 	"strconv"
 )
 
 // 参数 type
 func GetList(c *gin.Context) {
-	api := adminApp.ApiInit(c)
+	api := app.ApiFunction{C: c}
 
 	// 必须要 type 参数
 	model := &shoppingCartModel.ShoppingCart{}
@@ -31,7 +31,7 @@ func GetList(c *gin.Context) {
 
 // 通过临时订单获取所有信息
 func GetDetailByID(c *gin.Context) {
-	api := adminApp.ApiInit(c)
+	api := app.ApiFunction{C: c}
 
 	model := &shoppingCartModel.ShoppingCart{}
 
@@ -54,7 +54,7 @@ func GetDetailByID(c *gin.Context) {
 }
 
 func GetDetailByTempOrderId(c *gin.Context) {
-	api := adminApp.ApiInit(c)
+	api := app.ApiFunction{C: c}
 
 	model := &shoppingCartModel.ShoppingCart{}
 

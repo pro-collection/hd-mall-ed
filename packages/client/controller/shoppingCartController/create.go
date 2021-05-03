@@ -2,8 +2,8 @@ package shoppingCartController
 
 import (
 	"github.com/gin-gonic/gin"
-	"hd-mall-ed/packages/admin/models/shoppingCartModel"
-	"hd-mall-ed/packages/common/pkg/adminApp"
+	"hd-mall-ed/packages/client/models/shoppingCartModel"
+	"hd-mall-ed/packages/common/pkg/app"
 	"hd-mall-ed/packages/common/pkg/e"
 	"time"
 )
@@ -12,7 +12,7 @@ import (
 数组形式的参数 tableModel.ShoppingCartBase
 */
 func Create(c *gin.Context) {
-	api := adminApp.ApiInit(c)
+	api := app.ApiFunction{C: c}
 
 	model := &shoppingCartModel.ShoppingCart{}
 
