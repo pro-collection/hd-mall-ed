@@ -30,7 +30,6 @@ func Create(c *gin.Context) {
 		return
 	}
 
-
 	if model.Type == 2 {
 		api.Response(model.TempOrderId)
 		return
