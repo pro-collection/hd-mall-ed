@@ -1,6 +1,5 @@
 package tableModel
 
-
 /*
 type 类型
 	1 - 购物车
@@ -8,9 +7,10 @@ type 类型
 */
 type ShoppingCartBase struct {
 	ID        uint `json:"id" gorm:"primarykey"`
+	UserId    uint `json:"user_id" gorm:"index;comment:关联的UserId"`
 	ProductId uint `json:"product_id" gorm:"index;comment:关联的productId"`
-	Type int `json:"type" gorm:"not null;comment:图片类型" valid:"required"`
-	Count int `json:"count" gorm:"not null;comment:数量;default:1" valid:"required"`
+	Type      int  `json:"type" gorm:"not null;comment:类型" valid:"required"`
+	Count     int  `json:"count" gorm:"not null;comment:数量;default:1"`
 }
 
 type ShoppingCart struct {
