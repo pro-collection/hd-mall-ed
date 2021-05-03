@@ -28,7 +28,18 @@ func GetList(c *gin.Context) {
 		return
 	}
 
-	api.Response(list)
+	var resList []getDetailByIDResStruct
+
+	for _, cart := range *list {
+		productMapper := &productModel.Product{}
+		var res getDetailByIDResStruct
+		err = productMapper.GetById(int(cart.ProductId))
+		_ = deepcopier.Copy(&cart).To(&res)
+		res.ProductInfo = *productMapper
+		resList = append(resList, res)
+	}
+
+	api.Response(resList)
 }
 
 // 通过临时订单获取所有信息
