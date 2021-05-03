@@ -8,16 +8,18 @@ import (
 )
 
 /*
-参数 id 就行
+参数 idList 就行
 */
 func Delete(c *gin.Context) {
 	api := adminApp.ApiInit(c)
 
 	model := &shoppingCartModel.ShoppingCart{}
 
-	_ = c.ShouldBindJSON(model)
+	idList := &[]uint{}
 
-	err := model.Delete()
+	_ = c.ShouldBind(idList)
+
+	err := model.Delete(idList)
 	if err != nil {
 		api.ResFail(e.Fail)
 		return

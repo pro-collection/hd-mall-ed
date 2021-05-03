@@ -41,8 +41,8 @@ func (shoppingCart *ShoppingCart) GetList() (*[]ShoppingCart, error) {
 }
 
 // 删除
-func (shoppingCart *ShoppingCart) Delete() error {
-	return database.DataBase.Delete(shoppingCart).Error
+func (shoppingCart *ShoppingCart) Delete(idList *[]uint) error {
+	return database.DataBase.Where("id in ?", idList).Delete(&ShoppingCart{}).Error
 }
 
 // 更新

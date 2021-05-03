@@ -5,7 +5,7 @@ import (
 	"hd-mall-ed/packages/common/database/tableModel"
 )
 
-type getDetailByIDResStruct struct {
+type deleteParams struct {
 	ProductInfo productModel.Product `json:"product_info"`
 	tableModel.ShoppingCart
 }
