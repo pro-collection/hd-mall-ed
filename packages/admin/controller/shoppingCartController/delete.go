@@ -7,6 +7,9 @@ import (
 	"hd-mall-ed/packages/common/pkg/e"
 )
 
+/*
+参数 id 就行
+*/
 func Delete(c *gin.Context) {
 	api := adminApp.ApiInit(c)
 

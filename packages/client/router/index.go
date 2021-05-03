@@ -41,7 +41,11 @@ func SetUpRouter() *gin.Engine {
 		// address 相关接口
 		addressRouter(index)
 
+		// 静态资源文件
 		staticRouter(index)
+
+		// 购物车/临时待创建订单信息
+		ShoppingCartRouter(index)
 	}
 
 	return router

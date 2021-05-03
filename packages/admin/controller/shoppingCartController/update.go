@@ -7,6 +7,9 @@ import (
 	"hd-mall-ed/packages/common/pkg/e"
 )
 
+/*
+参数 tableModel.ShoppingCartBase
+*/
 func Update(c *gin.Context) {
 	api := adminApp.ApiInit(c)
 
