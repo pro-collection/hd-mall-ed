@@ -12,6 +12,16 @@ func (*ShoppingCart) CreateShoppingCartInfo(infoList *[]ShoppingCart) error {
 	return database.DataBase.Model(&ShoppingCart{}).Create(infoList).Error
 }
 
+// 通过 id 拿到信息
+func (*ShoppingCart) GetDetailById(id uint) (*ShoppingCart, error) {
+	cart := &ShoppingCart{}
+	err := database.DataBase.Where("id = ?", id).First(cart).Error
+	if err != nil {
+		return cart, err
+	}
+	return cart, nil
+}
+
 // 获取所有的
 func (shoppingCart *ShoppingCart) GetList() (*[]ShoppingCart, error) {
 	list := &[]ShoppingCart{}
