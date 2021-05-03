@@ -30,6 +30,8 @@ func GetList(c *gin.Context) {
 
 	var resList []getDetailByIDResStruct
 
+	//ch := make(chan productModel.Product, len(*list))
+
 	for _, cart := range *list {
 		productMapper := &productModel.Product{}
 		var res getDetailByIDResStruct

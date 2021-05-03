@@ -19,5 +19,8 @@ func ShoppingCartRouter(router *gin.RouterGroup)  {
 
 		// 更新
 		shoppingCart.POST("/update", shoppingCartController.Update)
+
+		// 根据 temp id 获取信息
+		shoppingCart.GET("/get_by_id", shoppingCartController.GetDetailByID)
 	}
 }
