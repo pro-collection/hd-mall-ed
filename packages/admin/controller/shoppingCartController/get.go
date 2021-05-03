@@ -49,28 +49,44 @@ func GetDetailByID(c *gin.Context) {
 	api := adminApp.ApiInit(c)
 
 	model := &shoppingCartModel.ShoppingCart{}
-	productMapper := &productModel.Product{}
-	response := &getDetailByIDResStruct{}
 
-	idString := c.DefaultQuery("temp_id", "")
+	idString := c.DefaultQuery("id", "")
 	if idString == "" {
 		api.ResFail(e.Fail)
 		return
 	}
 
 	id, _ := strconv.Atoi(idString)
-	cart, err := model.GetDetailById(uint(id))
-
-	err = deepcopier.Copy(cart).To(response)
-
-	// 获取 product 信息
-	err = productMapper.GetById(int(cart.ProductId))
-	response.ProductInfo = *productMapper
+	model.ID = uint(id)
+	err := model.GetDetailById()
 
 	if err != nil {
 		api.ResFail(e.Fail)
 		return
 	}
 
-	api.Response(response)
+	api.Response(model)
+}
+
+func GetDetailByTempOrderId(c *gin.Context) {
+	api := adminApp.ApiInit(c)
+
+	model := &shoppingCartModel.ShoppingCart{}
+
+	tempOrderIdString := c.DefaultQuery("temp_order_id", "")
+	if tempOrderIdString == "" {
+		api.ResFail(e.Fail)
+		return
+	}
+
+	id, _ := strconv.Atoi(tempOrderIdString)
+	model.TempOrderId = uint(id)
+
+	list, err := model.GetListByTempOrderId()
+	if err != nil {
+		api.ResFail(e.Fail)
+		return
+	}
+
+	api.Response(list)
 }

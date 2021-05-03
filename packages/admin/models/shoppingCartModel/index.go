@@ -13,13 +13,18 @@ func (shoppingCart *ShoppingCart) CreateShoppingCartInfo() error {
 }
 
 // 通过 id 拿到信息
-func (*ShoppingCart) GetDetailById(id uint) (*ShoppingCart, error) {
-	cart := &ShoppingCart{}
-	err := database.DataBase.Where("id = ?", id).First(cart).Error
+func (shoppingCart *ShoppingCart) GetDetailById() error {
+	return database.DataBase.Where("id = ?", shoppingCart.ID).First(shoppingCart).Error
+}
+
+// 通过 id 拿到信息
+func (shoppingCart *ShoppingCart) GetListByTempOrderId() (*[]ShoppingCart, error) {
+	cartList := &[]ShoppingCart{}
+	err := database.DataBase.Where("temp_order_id = ?", shoppingCart.TempOrderId).Find(cartList).Error
 	if err != nil {
-		return cart, err
+		return cartList, err
 	}
-	return cart, nil
+	return cartList, nil
 }
 
 // 获取所有的
