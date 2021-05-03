@@ -15,6 +15,7 @@ func autoMigrateTable() {
 		&tableModel.Product{},
 		&tableModel.ProductCategory{},
 		&tableModel.Static{},
+		&tableModel.ShoppingCart{},
 	)
 
 	if err != nil {

@@ -14,5 +14,6 @@ type ShoppingCartBase struct {
 }
 
 type ShoppingCart struct {
+	ShoppingCartBase
 	ModelStruct
 }
