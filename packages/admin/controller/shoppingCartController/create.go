@@ -15,11 +15,15 @@ func Create(c *gin.Context) {
 
 	model := &shoppingCartModel.ShoppingCart{}
 
-	listParams := &[]shoppingCartModel.ShoppingCart{}
+	var listParams []shoppingCartModel.ShoppingCart
 
-	_ = c.ShouldBindJSON(model)
+	_ = c.ShouldBind(&listParams)
 
-	err := model.CreateShoppingCartInfo(listParams)
+	for i, _ := range listParams {
+		listParams[i].UserId = uint(api.GetUserId())
+	}
+
+	err := model.CreateShoppingCartInfo(&listParams)
 	if err != nil {
 		api.ResFail(e.Fail)
 		return
@@ -27,7 +31,7 @@ func Create(c *gin.Context) {
 
 	isTempOrder := false
 	var tempOrderId uint
-	for index, cart := range *listParams {
+	for index, cart := range listParams {
 		if index == 0 {
 			if cart.Type == 2 {
 				isTempOrder = true
