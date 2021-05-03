@@ -2,8 +2,6 @@ package shoppingCartController
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/ulule/deepcopier"
-	"hd-mall-ed/packages/admin/models/productModel"
 	"hd-mall-ed/packages/admin/models/shoppingCartModel"
 	"hd-mall-ed/packages/common/pkg/adminApp"
 	"hd-mall-ed/packages/common/pkg/e"
@@ -28,20 +26,7 @@ func GetList(c *gin.Context) {
 		return
 	}
 
-	var resList []getDetailByIDResStruct
-
-	//ch := make(chan productModel.Product, len(*list))
-
-	for _, cart := range *list {
-		productMapper := &productModel.Product{}
-		var res getDetailByIDResStruct
-		err = productMapper.GetById(int(cart.ProductId))
-		_ = deepcopier.Copy(&cart).To(&res)
-		res.ProductInfo = *productMapper
-		resList = append(resList, res)
-	}
-
-	api.Response(resList)
+	api.Response(list)
 }
 
 // 通过临时订单获取所有信息
