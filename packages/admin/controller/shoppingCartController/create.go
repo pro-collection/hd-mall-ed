@@ -25,5 +25,19 @@ func Create(c *gin.Context) {
 		return
 	}
 
+	isTempOrder := false
+	var tempOrderId uint
+	for index, cart := range *listParams {
+		if index == 0 {
+			if cart.Type == 2 {
+				isTempOrder = true
+				tempOrderId = cart.ID
+			}
+		}
+	}
+	if isTempOrder {
+		api.Response(tempOrderId)
+		return
+	}
 	api.ResponseNoData()
 }
