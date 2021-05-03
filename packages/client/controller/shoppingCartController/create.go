@@ -24,6 +24,19 @@ func Create(c *gin.Context) {
 		model.TempOrderId = uint(time.Now().UnixNano() / 1e6)
 	}
 
+	if model.Type == 1 {
+		// 加入购物车场景
+		query := make(map[string]interface{})
+		query["product_id"] = model.ProductId
+		query["type"] = 1
+		query["user_id"] = api.GetUserId()
+		cart, _ := model.GetDetailByQuery(&query)
+		if cart.ID != 0 {
+			api.ResFailMessage(e.Fail, "该商品已经加入购物车, 请勿重复添加")
+			return
+		}
+	}
+
 	err := model.CreateShoppingCartInfo()
 	if err != nil {
 		api.ResFail(e.Fail)

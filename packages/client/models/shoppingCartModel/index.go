@@ -17,6 +17,15 @@ func (shoppingCart *ShoppingCart) GetDetailById() error {
 	return database.DataBase.Where("id = ?", shoppingCart.ID).First(shoppingCart).Error
 }
 
+func (shoppingCart *ShoppingCart) GetDetailByQuery(query *map[string]interface{}) (*ShoppingCart, error) {
+	cart := &ShoppingCart{}
+	err := database.DataBase.Where(*query).First(cart).Error
+	if err != nil {
+		return cart, err
+	}
+	return cart, nil
+}
+
 // 通过 id 拿到信息
 func (shoppingCart *ShoppingCart) GetListByTempOrderId() (*[]ShoppingCart, error) {
 	cartList := &[]ShoppingCart{}
