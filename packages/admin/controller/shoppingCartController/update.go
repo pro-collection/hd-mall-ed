@@ -17,6 +17,8 @@ func Update(c *gin.Context) {
 
 	_ = c.ShouldBindJSON(model)
 
+	model.UserId = uint(api.GetUserId())
+
 	err := model.Update()
 	if err != nil {
 		api.ResFail(e.Fail)

@@ -47,7 +47,7 @@ func (shoppingCart *ShoppingCart) Delete() error {
 
 // 更新
 func (shoppingCart *ShoppingCart) Update() error {
-	return database.DataBase.Where("id = ?", shoppingCart.ID).
+	return database.DataBase.Model(&ShoppingCart{}).Where("id = ?", shoppingCart.ID).
 		Where("user_id", shoppingCart.UserId).
 		Update("count", shoppingCart.Count).Error
 }
