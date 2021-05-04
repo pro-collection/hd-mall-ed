@@ -30,7 +30,7 @@ func GetDetail(c *gin.Context) {
 		queryMapper["order_id"] = orderIdNumber
 	}
 
-	if id == "" || orderId == "" {
+	if id == "" && orderId == "" {
 		api.ResFail(e.Fail)
 		return
 	}

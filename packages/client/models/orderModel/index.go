@@ -12,7 +12,7 @@ func (order *Order) CreateOrder() error {
 }
 
 func (order *Order) GetOrderDetailByQuery(query *map[string]interface{}) error {
-	return database.DataBase.Where(query).First(order).Error
+	return database.DataBase.Where(*query).First(order).Error
 }
 
 // 获取列表信息
