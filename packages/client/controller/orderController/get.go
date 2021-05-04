@@ -41,7 +41,7 @@ func GetDetail(c *gin.Context) {
 		api.ResFail(e.Fail)
 		return
 	}
-	api.Response(queryMapper)
+	api.Response(orderMapper)
 }
 
 func GetList(c *gin.Context) {
