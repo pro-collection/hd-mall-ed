@@ -6,6 +6,7 @@ import (
 	"hd-mall-ed/packages/client/models/shoppingCartModel"
 	"hd-mall-ed/packages/common/pkg/app"
 	"hd-mall-ed/packages/common/pkg/e"
+	"time"
 )
 
 /*
@@ -18,6 +19,7 @@ func Create(c *gin.Context) {
 
 	err := c.ShouldBindJSON(orderMapper)
 	shoppingCartMapper.UserId = uint(api.GetUserId())
+
 	orderMapper.UserId = uint(api.GetUserId())
 	orderMapper.Status = 1 // 设置状态 - 确认订单
 
@@ -26,6 +28,9 @@ func Create(c *gin.Context) {
 
 	go shoppingCartMapper.StandUpdate("temp_order_id = ?", orderMapper.OrderId, &shoppingCartUpdateMap)
 
+	orderMapper.SendTime = time.Unix(0, 0)
+	orderMapper.ConfirmTime = time.Unix(0, 0)
+	orderMapper.CompleteTime = time.Unix(0, 0)
 	err = orderMapper.CreateOrder()
 	if err != nil {
 		api.ResFail(e.Fail)
