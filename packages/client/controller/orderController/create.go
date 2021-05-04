@@ -8,6 +8,9 @@ import (
 	"hd-mall-ed/packages/common/pkg/e"
 )
 
+/*
+请求参数 tableModel.OrderBase
+*/
 func Create(c *gin.Context) {
 	api := app.ApiFunction{C: c}
 	orderMapper := &orderModel.Order{}
