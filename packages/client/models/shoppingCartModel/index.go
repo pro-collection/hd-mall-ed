@@ -68,3 +68,10 @@ func (shoppingCart *ShoppingCart) Updates(queryMap *[]uint, updateMap *map[strin
 		Where("id in ?", *queryMap).
 		Updates(*updateMap).Error
 }
+
+func (shoppingCart *ShoppingCart) StandUpdate(queryString string, queryMap interface{}, updateMap *map[string]interface{}) error {
+	return database.DataBase.Model(&ShoppingCart{}).
+		Where("user_id", shoppingCart.UserId).
+		Where(queryString, queryMap).
+		Updates(updateMap).Error
+}

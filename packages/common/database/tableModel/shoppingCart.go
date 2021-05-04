@@ -4,7 +4,7 @@ package tableModel
 type 类型
 	1 - 购物车
 	2 - pre confirm order
-	3 - 购物车创建临时订单场景
+	3 - 订单场景
 */
 type ShoppingCartBase struct {
 	ID           uint    `json:"id" gorm:"primarykey"`

@@ -3,6 +3,7 @@ package orderController
 import (
 	"github.com/gin-gonic/gin"
 	"hd-mall-ed/packages/client/models/orderModel"
+	"hd-mall-ed/packages/client/models/shoppingCartModel"
 	"hd-mall-ed/packages/common/pkg/app"
 	"hd-mall-ed/packages/common/pkg/e"
 )
@@ -10,14 +11,17 @@ import (
 func Create(c *gin.Context) {
 	api := app.ApiFunction{C: c}
 	orderMapper := &orderModel.Order{}
+	shoppingCartMapper := &shoppingCartModel.ShoppingCart{}
 
 	err := c.ShouldBindJSON(orderMapper)
+	shoppingCartMapper.UserId = uint(api.GetUserId())
 	orderMapper.UserId = uint(api.GetUserId())
-	orderMapper.Status = 1
+	orderMapper.Status = 1 // 设置状态 - 确认订单
 
-	if api.ValidateHasError(orderMapper) {
-		return
-	}
+	shoppingCartUpdateMap := make(map[string]interface{})
+	shoppingCartUpdateMap["type"] = 3
+
+	go shoppingCartMapper.StandUpdate("temp_order_id = ?", orderMapper.OrderId, &shoppingCartUpdateMap)
 
 	err = orderMapper.CreateOrder()
 	if err != nil {
