@@ -46,6 +46,9 @@ func SetUpRouter() *gin.Engine {
 
 		// 购物车/临时待创建订单信息
 		ShoppingCartRouter(index)
+
+		// 订单
+		orderRouter(index)
 	}
 
 	return router

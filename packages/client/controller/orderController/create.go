@@ -29,5 +29,8 @@ func Create(c *gin.Context) {
 		return
 	}
 
-	api.ResponseNoData()
+	api.Response(&createRes{
+		Id:      orderMapper.ID,
+		OrderId: orderMapper.OrderId,
+	})
 }
