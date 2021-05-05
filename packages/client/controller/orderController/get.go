@@ -52,7 +52,7 @@ func GetList(c *gin.Context) {
 
 	status := c.DefaultQuery("status", "")
 	if status != "" {
-
+		queryMap["status"] = status
 	}
 
 	queryMap["user_id"] = api.GetUserId()
