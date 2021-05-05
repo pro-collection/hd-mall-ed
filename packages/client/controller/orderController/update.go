@@ -32,6 +32,7 @@ func Update(c *gin.Context) {
 			// 确认收货
 			queryMap["confirm_time"] = time.Now()
 		} else if orderMapper.Status == 4 {
+			queryMap["confirm_time"] = time.Now()
 			queryMap["complete_time"] = time.Now()
 		}
 	} else {
