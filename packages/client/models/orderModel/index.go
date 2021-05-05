@@ -29,10 +29,17 @@ func (order *Order) GetOrderListByQuery(query *map[string]interface{}) (*[]Order
 
 // 删除
 func (order *Order) DeleteOrder() error {
-	return database.DataBase.Delete(order).Error
+	return database.DataBase.Unscoped().Delete(order).Error
 }
 
 // 更新
 func (order *Order) Update() error {
 	return database.DataBase.Updates(order).Error
+}
+
+// 更新某些固定字段
+func (order *Order) StandUpdate(queryString string, queryMap interface{}, updateMap *map[string]interface{}) error  {
+	return database.DataBase.Where("user_id = ?", order.UserId).
+		Where(queryString, queryMap).
+		Updates(*updateMap).Error
 }
