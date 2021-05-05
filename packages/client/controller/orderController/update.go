@@ -18,6 +18,11 @@ func Update(c *gin.Context) {
 
 	queryMap := make(map[string]interface{})
 
+	if orderMapper.ID == 0 {
+		api.ResFail(e.NotFoundId)
+		return
+	}
+
 	if orderMapper.Status > 0 && orderMapper.Status <= 4 {
 		queryMap["status"] = orderMapper.Status
 		if orderMapper.Status == 2 {
