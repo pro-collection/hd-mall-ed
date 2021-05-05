@@ -69,6 +69,7 @@ func (shoppingCart *ShoppingCart) Updates(queryMap *[]uint, updateMap *map[strin
 		Updates(*updateMap).Error
 }
 
+// 可扩展更新方法
 func (shoppingCart *ShoppingCart) StandUpdate(queryString string, queryMap interface{}, updateMap *map[string]interface{}) error {
 	return database.DataBase.Model(&ShoppingCart{}).
 		Where("user_id", shoppingCart.UserId).

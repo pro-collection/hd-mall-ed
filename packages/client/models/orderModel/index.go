@@ -43,3 +43,10 @@ func (order *Order) StandUpdate(queryString string, queryMap interface{}, update
 		Where(queryString, queryMap).
 		Updates(*updateMap).Error
 }
+
+// 更新订单和时间
+func (order *Order) UpdateStatus(updateMap *map[string]interface{}) error {
+	return database.DataBase.Model(&Order{}).Where("user_id = ?", order.UserId).
+		Where("id = ?", order.ID).
+		Updates(*updateMap).Error
+}
