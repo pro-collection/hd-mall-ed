@@ -28,7 +28,7 @@ func (*Address) FindAddressByUserId(userId uint) (*[]tableModel.AddressBase, err
 		return nil, errors.New("user_id 不存在")
 	}
 
-	err := database.DataBase.Model(&Address{}).Where("user_id = ?", userId).Find(&addressList).Error
+	err := database.DataBase.Model(&Address{}).Where("user_id = ?", userId).Order("created_at desc").Find(&addressList).Error
 	if err != nil {
 		return &addressList, err
 	}

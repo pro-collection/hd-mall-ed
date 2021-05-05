@@ -19,7 +19,7 @@ func (order *Order) GetOrderDetailByQuery(query *map[string]interface{}) error {
 func (order *Order) GetOrderListByQuery(query *map[string]interface{}) (*[]Order, error) {
 	list := &[]Order{}
 
-	err := database.DataBase.Where(*query).Find(list).Error
+	err := database.DataBase.Where(*query).Order("created_at desc").Find(list).Error
 
 	if err != nil {
 		return list, err
