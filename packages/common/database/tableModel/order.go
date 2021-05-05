@@ -12,6 +12,7 @@ import "time"
 type OrderBase struct {
 	ID uint `json:"id" gorm:"primarykey"`
 	OrderId uint `json:"order_id" gorm:"index;comment:订单id,关联cart表 temp_order_id 字段"`
+	AddressId uint `json:"address_id" gorm:"地址绑定"`
 	Status int `json:"status" gorm:"comment:订单的状态"`
 	Remark string `json:"remark" gorm:"comment:留言"`
 	TotalCount int `json:"total_count" gorm:"comment:订单购买玩具商品数量"`

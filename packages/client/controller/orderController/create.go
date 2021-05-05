@@ -32,6 +32,9 @@ func Create(c *gin.Context) {
 	orderMapper.ConfirmTime = time.Unix(0, 0)
 	orderMapper.CompleteTime = time.Unix(0, 0)
 	err = orderMapper.CreateOrder()
+
+	// todo 需要扣除库存
+
 	if err != nil {
 		api.ResFail(e.Fail)
 		return
