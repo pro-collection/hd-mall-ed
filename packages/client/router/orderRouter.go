@@ -13,5 +13,7 @@ func orderRouter(router *gin.RouterGroup)  {
 		order.GET("/get_detail", orderController.GetDetail)
 
 		order.GET("/get_list", orderController.GetList)
+
+		order.POST("/delete", orderController.DeleteById)
 	}
 }
