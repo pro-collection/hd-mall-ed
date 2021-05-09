@@ -76,3 +76,12 @@ func (shoppingCart *ShoppingCart) StandUpdate(queryString string, queryMap inter
 		Where(queryString, queryMap).
 		Updates(updateMap).Error
 }
+
+// 可扩展更新方法 - 已经限定了 order_id
+func (shoppingCart *ShoppingCart) StandUpdateDefault(queryString string, queryMap interface{}, updateMap *map[string]interface{}) error {
+	return database.DataBase.Model(&ShoppingCart{}).
+		Where("user_id", shoppingCart.UserId).
+		Where("temp_order_id = ?", shoppingCart.TempOrderId).
+		Where(queryString, queryMap).
+		Updates(updateMap).Error
+}

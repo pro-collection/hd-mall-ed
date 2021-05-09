@@ -35,3 +35,10 @@ func (*Product) GetLimitDiscount() *[]tableModel.ProductBase {
 	database.DataBase.Where("tag = ", 6).Where("status = ", 1).Limit(12).Find(list)
 	return list
 }
+
+// 通过id列表返回
+func (*Product) GetDetailByIdList(IdList *[]uint) *[]tableModel.ProductBase {
+	list := &[]tableModel.ProductBase{}
+	database.DataBase.Model(&Product{}).Where("id in ?", *IdList).Find(list)
+	return list
+}

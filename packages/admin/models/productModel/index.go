@@ -102,6 +102,12 @@ func (product *Product) Update() error {
 	return database.DataBase.Where("id = ?", product.ID).Updates(*product).Error
 }
 
+func (*Product) StandUpdate(queryString string, queryMap interface{}, updateMap *map[string]interface{}) error {
+	return database.DataBase.Model(&Product{}).
+		Where(queryString, queryMap).
+		Updates(updateMap).Error
+}
+
 func (product *Product) Delete() error {
 	return database.DataBase.Delete(product).Error
 }

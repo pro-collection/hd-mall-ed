@@ -2,6 +2,7 @@ package orderController
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/ulule/deepcopier"
 	"hd-mall-ed/packages/client/models/orderModel"
 	"hd-mall-ed/packages/client/models/shoppingCartModel"
 	"hd-mall-ed/packages/common/pkg/app"
@@ -17,7 +18,13 @@ func Create(c *gin.Context) {
 	orderMapper := &orderModel.Order{}
 	shoppingCartMapper := &shoppingCartModel.ShoppingCart{}
 
-	err := c.ShouldBindJSON(orderMapper)
+	createRequestBody := &createReq{}
+
+	// 参数绑定只能有一次
+	err := c.ShouldBindJSON(createRequestBody)
+
+	// 复制信息
+	err = deepcopier.Copy(createRequestBody).To(orderMapper)
 	shoppingCartMapper.UserId = uint(api.GetUserId())
 
 	orderMapper.UserId = uint(api.GetUserId())
@@ -34,6 +41,7 @@ func Create(c *gin.Context) {
 	err = orderMapper.CreateOrder()
 
 	// todo 需要扣除库存
+	updateReduceInventoryService(c, createRequestBody)
 
 	if err != nil {
 		api.ResFail(e.Fail)
