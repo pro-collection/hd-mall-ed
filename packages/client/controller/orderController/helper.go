@@ -12,6 +12,7 @@ import (
 )
 
 // 减少库存
+// 更新销量
 func updateReduceInventoryService(c *gin.Context, body *createReq) {
 	api := app.ApiFunction{C: c}
 	adminProductMapper := &productModel2.Product{}
